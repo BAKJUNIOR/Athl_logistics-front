@@ -125,16 +125,16 @@ img { display: block; max-width: 100%; }
 .theme-toggle {
   display: inline-flex; align-items: center; justify-content: center;
   width: 46px; height: 46px; flex: 0 0 auto; padding: 0; cursor: pointer;
-  background: var(--surface-3); border: 1px solid var(--line-strong); border-radius: 8px;
-  color: var(--text-dim); transition: border-color .25s ease, color .25s ease;
+  background: transparent; border: 1px solid transparent; border-radius: 8px;
+  color: var(--text-dim); transition: background-color .25s ease, border-color .25s ease, color .25s ease;
 }
-.theme-toggle:hover { border-color: var(--accent); color: var(--text); }
+.theme-toggle:hover { background: var(--surface-3); border-color: var(--line-strong); color: var(--text); }
 .theme-toggle svg { width: 18px; height: 18px; }
 .mobile-menu .theme-toggle-row {
   display: flex; align-items: center; justify-content: space-between;
   padding: 13px 14px; font-size: 14px; color: var(--text-dim);
 }
-.mobile-menu .theme-toggle-row .theme-toggle { background: var(--surface-4); }
+.mobile-menu .theme-toggle-row .theme-toggle:hover { background: var(--surface-4); }
 
 /* Burger + menu mobile */
 .burger {
