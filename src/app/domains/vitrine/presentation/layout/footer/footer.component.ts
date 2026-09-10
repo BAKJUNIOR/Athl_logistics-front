@@ -1,18 +1,18 @@
 // Pied de page du site vitrine, identique sur toutes les pages.
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
-  imports: [RouterLink],
+  imports: [RouterLink, RouterLinkActive],
   template: `
     <footer class="footer">
       <div class="footer__top">
         <div>
           <nav class="footer__nav">
-            <a routerLink="/">Accueil</a>
-            <a routerLink="/services">Services</a>
-            <a routerLink="/a-propos">À propos</a>
+            <a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }">Accueil</a>
+            <a routerLink="/services" routerLinkActive="is-active">Services</a>
+            <a routerLink="/a-propos" routerLinkActive="is-active">À propos</a>
           </nav>
           <p class="footer__about">
             Africa Talent Habitat &amp; Logistique — construction, rénovation, mobilité et importation
@@ -29,10 +29,10 @@ import { RouterLink } from '@angular/router';
 
         <div class="footer__right">
           <nav class="footer__nav">
-            <a routerLink="/projets">Projets</a>
-            <a routerLink="/carrieres">Carrières</a>
-            <a routerLink="/contact">Contact</a>
-            <a routerLink="/devis">Devis</a>
+            <a routerLink="/projets" routerLinkActive="is-active">Projets</a>
+            <a routerLink="/carrieres" routerLinkActive="is-active">Carrières</a>
+            <a routerLink="/contact" routerLinkActive="is-active">Contact</a>
+            <a routerLink="/devis" routerLinkActive="is-active">Devis</a>
           </nav>
           <div class="socials">
             <a routerLink="/contact" aria-label="Facebook">f</a>
