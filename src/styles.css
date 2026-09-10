@@ -117,7 +117,7 @@ img { display: block; max-width: 100%; }
 .header { display: flex; align-items: center; justify-content: space-between; gap: 40px; padding: 26px 0 10px; }
 .logo img { height: 58px; width: auto; }
 .nav { display: flex; align-items: center; gap: clamp(18px, 2.4vw, 38px); font-size: 13.5px; white-space: nowrap; }
-.nav a.is-active, .footer__nav a.is-active { color: var(--text); font-weight: 500; }
+.nav a.is-active, .footer__nav a.is-active { color: var(--text); font-weight: 700; font-size: 1.1em; }
 .header__actions { display: flex; align-items: center; gap: 12px; flex: 0 0 auto; }
 .header__actions > * { flex: 0 0 auto; }
 
