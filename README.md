@@ -34,7 +34,7 @@ src/app/
     └── ui/
 ```
 
-**Principe** : dans un domaine, `presentation` dépend de `domain`, et `domain` ne dépend jamais de `infrastructure` — c'est `infrastructure` qui implémente les contrats définis dans `domain`. Un domaine `example/` sert de modèle à dupliquer pour chaque nouvelle fonctionnalité (ex: `shipments/`, `fleet/`, `clients/`).
+**Principe** : dans un domaine, `presentation` dépend de `domain`, et `domain` ne dépend jamais de `infrastructure` — c'est `infrastructure` qui implémente les contrats définis dans `domain`. Le domaine `vitrine/` (site public ATHL) sert d'exemple concret à dupliquer pour chaque nouvelle fonctionnalité (ex: `shipments/`, `fleet/`, `clients/`).
 
 ## Development server
 

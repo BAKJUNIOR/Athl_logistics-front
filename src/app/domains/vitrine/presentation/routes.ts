@@ -1,0 +1,30 @@
+// Routes du site vitrine ATHL, chargées en lazy-loading depuis app.routes.ts.
+import { Routes } from '@angular/router';
+import { VitrineLayoutComponent } from './layout/vitrine-layout.component';
+import { HomeComponent } from './pages/home/home.component';
+import { AboutComponent } from './pages/about/about.component';
+import { TeamComponent } from './pages/team/team.component';
+import { ServicesComponent } from './pages/services/services.component';
+import { ServiceDetailComponent } from './pages/service-detail/service-detail.component';
+import { ProjectsComponent } from './pages/projects/projects.component';
+import { CareersComponent } from './pages/careers/careers.component';
+import { QuoteComponent } from './pages/quote/quote.component';
+import { ContactComponent } from './pages/contact/contact.component';
+
+export const routes: Routes = [
+  {
+    path: '',
+    component: VitrineLayoutComponent,
+    children: [
+      { path: '', component: HomeComponent },
+      { path: 'a-propos', component: AboutComponent },
+      { path: 'equipe', component: TeamComponent },
+      { path: 'services', component: ServicesComponent },
+      { path: 'services/:slug', component: ServiceDetailComponent },
+      { path: 'projets', component: ProjectsComponent },
+      { path: 'carrieres', component: CareersComponent },
+      { path: 'devis', component: QuoteComponent },
+      { path: 'contact', component: ContactComponent },
+    ],
+  },
+];

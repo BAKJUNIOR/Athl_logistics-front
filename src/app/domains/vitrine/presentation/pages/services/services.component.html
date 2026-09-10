@@ -1,0 +1,21 @@
+<section class="phero">
+  <div class="phero__eyebrow" appReveal>Nos services</div>
+  <h1 [appReveal]="80">Du chantier à la logistique</h1>
+  <p [appReveal]="160">Quatre métiers complémentaires pour mener vos projets de bout en bout, avec un seul interlocuteur.</p>
+</section>
+
+<section class="svc-list">
+  @for (service of services; track service.slug; let i = $index) {
+    <article class="svc" [appReveal]="60 + i * 80">
+      <div class="svc__media"><img [src]="service.image" [alt]="service.title" loading="lazy" /></div>
+      <div class="svc__body">
+        <div class="svc__num">{{ service.number }}</div>
+        <h2>{{ service.title }}</h2>
+        <p class="lead">{{ service.lead }}</p>
+        <a class="btn btn--light" [routerLink]="['/services', service.slug]">En savoir plus</a>
+      </div>
+    </article>
+  }
+</section>
+
+<app-cta-banner appReveal title="Besoin de conseils ou d'un devis ?" text="Pour plus d'informations, contactez-nous :" [showPhones]="true" [showActions]="false" />

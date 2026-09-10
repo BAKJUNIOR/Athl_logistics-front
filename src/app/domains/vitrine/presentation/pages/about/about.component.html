@@ -1,0 +1,47 @@
+<section class="phero">
+  <div class="phero__eyebrow" appReveal>À propos</div>
+  <h1 [appReveal]="80">Africa Talent Habitat &amp; Logistique</h1>
+  <p [appReveal]="160">L'expertise qui bâtit, la logistique qui accélère. Un groupe ivoirien qui réunit construction, rénovation, mobilité et importation de matériaux.</p>
+</section>
+
+<section class="split">
+  <div class="frame" appReveal>
+    <img src="images/team-lead.png" alt="Équipes ATHL sur le chantier" loading="lazy" />
+  </div>
+  <div class="split__col" [appReveal]="140">
+    <div>
+      <h2>Nous assumons le chantier. Nous livrons des résultats plus solides</h2>
+      <p class="lead">ATHL réunit des professionnels expérimentés, des méthodes éprouvées et une culture de la responsabilité pour livrer des projets qui traversent le temps. De la construction et la rénovation à la mobilité et à l'importation de matériaux, nos équipes travaillent avec clarté, rigueur et savoir-faire.</p>
+      <a class="btn btn--light btn--block" routerLink="/equipe">Rencontrer nos équipes</a>
+    </div>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat__num"><app-stat-counter [to]="2193" suffix="+" /></div>
+        <div class="stat__label">Chantiers livrés en toute sécurité et dans les délais</div>
+      </div>
+      <div class="stat">
+        <div class="stat__num"><app-stat-counter [to]="3.16" [decimals]="2" suffix=" M€" /></div>
+        <div class="stat__label">Valeur de projets façonnée par une planification rigoureuse</div>
+      </div>
+      <div class="stat">
+        <div class="stat__num"><app-stat-counter [to]="121.2" [decimals]="1" suffix=" M€" /></div>
+        <div class="stat__label">Valeur d'actifs bâtie en commercial et résidentiel</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="values">
+  <h2 appReveal>Ce qui nous engage</h2>
+  <div class="values__grid">
+    <div class="value" [appReveal]="60"><div class="value__n">Talent</div><p>Des équipes qualifiées, formées et encadrées — le premier matériau de chaque projet.</p></div>
+    <div class="value" [appReveal]="140"><div class="value__n">Habitat</div><p>Construire et rénover des lieux durables, pensés pour ceux qui vont les vivre.</p></div>
+    <div class="value" [appReveal]="220"><div class="value__n">Logistique</div><p>Maîtriser la chaîne d'approvisionnement et la mobilité pour tenir les délais.</p></div>
+    <div class="value" [appReveal]="300"><div class="value__n">Sécurité</div><p>Aucune livraison n'excuse un risque : la sécurité conditionne chaque décision de chantier.</p></div>
+  </div>
+</section>
+
+<app-cta-banner appReveal title="Travaillons ensemble" text="Pour un devis, un partenariat ou une candidature, nos équipes sont joignables directement.">
+  <a class="btn btn--light" routerLink="/contact">Nous contacter</a>
+  <a class="btn btn--ghost" routerLink="/carrieres">Carrières</a>
+</app-cta-banner>

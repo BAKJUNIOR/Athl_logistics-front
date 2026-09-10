@@ -1,0 +1,72 @@
+<section class="phero">
+  <div class="phero__eyebrow" appReveal>Devis gratuit</div>
+  <h1 [appReveal]="80">Demander un devis</h1>
+  <p [appReveal]="160">Quatre champs suffisent. Nous vous rappelons sous 48 h ouvrées.</p>
+</section>
+
+<section class="devis">
+  <form
+    #form
+    class="form form--quote"
+    [appReveal]="80"
+    [action]="formAction"
+    method="POST"
+    enctype="multipart/form-data"
+    novalidate
+    (submit)="onSubmit($event, form)"
+  >
+    <input type="hidden" name="_subject" value="Demande de devis ATHL" />
+    <input type="hidden" name="_captcha" value="false" />
+    <input type="hidden" name="_template" value="table" />
+
+    <div class="field field--full">
+      <label for="q-service">Service concerné <span class="req">*</span></label>
+      <select id="q-service" name="Service" required>
+        <option value="">Choisir un service…</option>
+        <option value="Réalisation de projets de construction">Réalisation de projets de construction</option>
+        <option value="Rénovation &amp; aménagement">Rénovation &amp; aménagement</option>
+        <option value="VTC, mobilité &amp; livraison">VTC, mobilité &amp; livraison</option>
+        <option value="Importation de matériaux">Importation de matériaux de construction</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="q-nom">Nom et prénoms <span class="req">*</span></label>
+      <input id="q-nom" name="Nom" type="text" required autocomplete="name" placeholder="Ex. Konan Yao" />
+    </div>
+    <div class="field">
+      <label for="q-tel">Téléphone <span class="req">*</span></label>
+      <input id="q-tel" name="Téléphone" type="tel" required autocomplete="tel" placeholder="+225 07 00 00 00 00" />
+    </div>
+
+    <div class="field field--full">
+      <label for="q-desc">Votre projet <span class="req">*</span></label>
+      <textarea id="q-desc" name="Description" rows="5" required placeholder="Nature des travaux, lieu, surface, délais souhaités…"></textarea>
+    </div>
+
+    <div class="field field--full">
+      <label for="q-files">Plans ou photos <span class="opt">(facultatif)</span></label>
+      <app-file-drop
+        name="Documents"
+        [multiple]="true"
+        label="Déposez vos fichiers ici ou"
+        browseLabel="parcourez vos fichiers"
+        hint="PDF, DOC, JPG, PNG ou ZIP — 5 Mo au total"
+      />
+    </div>
+
+    <div class="field field--full check">
+      <input id="q-ok" name="Consentement" type="checkbox" value="Oui" required />
+      <label for="q-ok">J'autorise ATHL à me contacter au sujet de cette demande. <span class="req">*</span></label>
+    </div>
+
+    <div class="field field--full form__foot">
+      <button class="btn btn--light" type="submit">Envoyer ma demande</button>
+      <a class="btn btn--ghost" href="tel:+2250778095858">Appeler : +225 07 78 09 58 58</a>
+    </div>
+
+    @if (status(); as message) {
+      <p class="form__status" [class.is-err]="!isValid()" [class.is-ok]="isValid()" role="status">{{ message }}</p>
+    }
+  </form>
+</section>
