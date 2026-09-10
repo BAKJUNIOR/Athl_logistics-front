@@ -23,7 +23,6 @@ import { ThemeService } from '../../../../../core/services/theme.service';
       </nav>
 
       <div class="header__actions">
-        <a class="btn btn--light btn--sm" href="/devis" (click)="openQuote($event)">Demander un devis</a>
         <button
           class="theme-toggle"
           type="button"
@@ -41,6 +40,7 @@ import { ThemeService } from '../../../../../core/services/theme.service';
             </svg>
           }
         </button>
+        <a class="btn btn--light btn--sm" href="/devis" (click)="openQuote($event)">Demander un devis</a>
         <button
           class="burger"
           type="button"
