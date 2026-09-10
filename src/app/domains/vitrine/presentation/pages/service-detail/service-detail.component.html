@@ -1,0 +1,59 @@
+@let svc = service();
+
+<section class="phero">
+  <div class="phero__eyebrow" appReveal><a routerLink="/services">Services</a> · Service {{ svc.number }}</div>
+  <h1 [appReveal]="80">{{ svc.shortTitle }}</h1>
+  <p [appReveal]="160">{{ svc.lead }}</p>
+  <div class="hero-actions hero-actions--left" [appReveal]="240">
+    <a class="btn btn--light" routerLink="/devis">Demander un devis</a>
+    <a class="btn btn--ghost" routerLink="/contact">Nous écrire</a>
+  </div>
+</section>
+
+<section class="svc-hero" appReveal>
+  <img [src]="svc.heroImage" [alt]="svc.title" loading="lazy" />
+</section>
+
+<section class="prest">
+  <h2 appReveal>Ce que nous prenons en charge</h2>
+  <div class="prest__grid">
+    @for (item of svc.prestations; track item.title; let i = $index) {
+      <div class="prest__item" [appReveal]="60 + i * 70">
+        <div class="prest__t">{{ item.title }}</div>
+        <p>{{ item.description }}</p>
+      </div>
+    }
+  </div>
+</section>
+
+<section class="process">
+  <h2 appReveal>Comment nous travaillons</h2>
+  <div class="process__grid">
+    @for (step of svc.process; track step.number; let i = $index) {
+      <div class="pstep" [appReveal]="60 + i * 70">
+        <div class="pstep__n">{{ step.number }}</div>
+        <div class="pstep__t">{{ step.title }}</div>
+        <p>{{ step.description }}</p>
+      </div>
+    }
+  </div>
+</section>
+
+<section class="gallery gallery--tight">
+  <h2 appReveal>En images</h2>
+  <div class="gallery__grid gallery__grid--3">
+    @for (image of svc.gallery; track image; let i = $index) {
+      <figure class="shot" [appReveal]="60 + i * 80"><img [src]="image" [alt]="svc.title" loading="lazy" /></figure>
+    }
+  </div>
+</section>
+
+<app-cta-banner appReveal title="Parlons de votre projet" text="Pour plus d'informations, contactez-nous :" [showPhones]="true">
+  <a class="btn btn--light" routerLink="/contact">Nous contacter</a>
+  <a class="btn btn--ghost" routerLink="/projets">Nos réalisations</a>
+</app-cta-banner>
+
+<nav class="nextsvc" appReveal>
+  <span>Service suivant</span>
+  <a [routerLink]="['/services', next().slug]">{{ next().shortTitle }} <em aria-hidden="true">&rarr;</em></a>
+</nav>
