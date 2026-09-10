@@ -6,15 +6,9 @@ import { JobOffer, deadlineStatus, daysUntilDeadline } from '../../../domain/job
 import { JOB_OFFERS } from '../../../infrastructure/data/jobs.data';
 import { RevealDirective } from '../../components/reveal.directive';
 import { FileDropComponent } from '../../components/file-drop/file-drop.component';
+import { normalizeText } from '../../../../../core/utils/text.util';
 
 const APPLY_FORM_ACTION = 'https://formsubmit.co/recrutement@athl.com';
-
-function normalize(text: string): string {
-  return text
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '');
-}
 
 @Component({
   selector: 'app-careers',
@@ -33,13 +27,13 @@ export class CareersComponent {
   readonly preselectedPoste = signal('');
 
   readonly filteredJobs = computed(() => {
-    const query = normalize(this.search().trim());
+    const query = normalizeText(this.search().trim());
     const tag = this.activeTag();
     return this.jobs.filter((job) => {
       const matchesTag = !tag || job.domain === tag;
       const matchesQuery =
         !query ||
-        normalize(`${job.title} ${job.description} ${job.meta} ${job.domain}`).includes(query);
+        normalizeText(`${job.title} ${job.description} ${job.meta} ${job.domain}`).includes(query);
       return matchesTag && matchesQuery;
     });
   });

@@ -1,4 +1,4 @@
-// En-tête du site vitrine : logo, navigation, bouton devis (ouvre la modal), thème clair/sombre et menu mobile.
+// En-tête du site vitrine : logo, navigation, recherche, bouton devis (ouvre la modal), thème clair/sombre et menu mobile.
 import { Component, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { QuoteModalService } from '../../services/quote-modal.service';
@@ -23,8 +23,14 @@ import { ThemeService } from '../../../../../core/services/theme.service';
       </nav>
 
       <div class="header__actions">
+        <a class="icon-btn" routerLink="/recherche" routerLinkActive="is-active" aria-label="Rechercher sur le site">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" />
+            <line x1="21" y1="21" x2="16.2" y2="16.2" />
+          </svg>
+        </a>
         <button
-          class="theme-toggle"
+          class="icon-btn"
           type="button"
           [attr.aria-label]="themeService.theme() === 'dark' ? 'Activer le thème clair' : 'Activer le thème sombre'"
           (click)="themeService.toggle()"
@@ -62,11 +68,12 @@ import { ThemeService } from '../../../../../core/services/theme.service';
       <a routerLink="/carrieres" routerLinkActive="is-active" (click)="menuOpen.set(false)">Carrières</a>
       <a routerLink="/a-propos" routerLinkActive="is-active" (click)="menuOpen.set(false)">À propos</a>
       <a routerLink="/contact" (click)="menuOpen.set(false)">Contact</a>
+      <a routerLink="/recherche" routerLinkActive="is-active" (click)="menuOpen.set(false)">Rechercher</a>
       <a href="/devis" (click)="openQuote($event); menuOpen.set(false)">Demander un devis</a>
       <div class="theme-toggle-row">
         <span>Thème {{ themeService.theme() === 'dark' ? 'sombre' : 'clair' }}</span>
         <button
-          class="theme-toggle"
+          class="icon-btn"
           type="button"
           [attr.aria-label]="themeService.theme() === 'dark' ? 'Activer le thème clair' : 'Activer le thème sombre'"
           (click)="themeService.toggle()"

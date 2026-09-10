@@ -1,0 +1,43 @@
+<section class="phero">
+  <div class="phero__eyebrow">Recherche</div>
+  <h1>Rechercher sur le site</h1>
+  <p>Services, équipe, offres d'emploi et pages du site ATHL.</p>
+</section>
+
+<section class="search-page">
+  <div class="jobsearch search-page__input">
+    <span class="jobsearch__icon" aria-hidden="true">&#9906;</span>
+    <input
+      type="search"
+      placeholder="Rechercher un service, un métier, une page…"
+      aria-label="Rechercher sur le site"
+      [value]="query()"
+      (input)="query.set($any($event.target).value)"
+    />
+    @if (query()) {
+      <button class="jobsearch__clear" type="button" aria-label="Effacer la recherche" (click)="clear()">&#215;</button>
+    }
+  </div>
+
+  @if (query().trim()) {
+    <div class="jobcount">{{ countLabel() }}</div>
+
+    @if (!results().length) {
+      <p class="jobempty">Aucun résultat pour « {{ query() }} ». Essayez un autre terme ou consultez nos <a routerLink="/services">services</a>.</p>
+    }
+
+    @for (group of resultsByCategory(); track group.category) {
+      <div class="search-group">
+        <h2 class="search-group__title">{{ group.category }}</h2>
+        <div class="search-group__list">
+          @for (item of group.items; track item.title + item.url) {
+            <a class="search-result" [routerLink]="item.url" [fragment]="item.fragment">
+              <div class="search-result__title">{{ item.title }}</div>
+              <div class="search-result__excerpt">{{ item.excerpt }}</div>
+            </a>
+          }
+        </div>
+      </div>
+    }
+  }
+</section>

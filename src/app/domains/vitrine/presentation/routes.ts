@@ -10,6 +10,7 @@ import { ProjectsComponent } from './pages/projects/projects.component';
 import { CareersComponent } from './pages/careers/careers.component';
 import { QuoteComponent } from './pages/quote/quote.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { SearchComponent } from './pages/search/search.component';
 
 export const routes: Routes = [
   {
@@ -25,6 +26,7 @@ export const routes: Routes = [
       { path: 'carrieres', component: CareersComponent },
       { path: 'devis', component: QuoteComponent },
       { path: 'contact', component: ContactComponent },
+      { path: 'recherche', component: SearchComponent },
     ],
   },
 ];
