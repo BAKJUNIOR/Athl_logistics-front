@@ -1,8 +1,9 @@
-// Source de données statique pour le domaine "Service".
+// Source de données statique pour le domaine "Service", en français et en anglais.
 // À remplacer par infrastructure/api/service.api.ts le jour où ces contenus seront pilotés par un back-office.
 import { Service } from '../../domain/service.entity';
+import { Lang } from '../../../../core/services/language.service';
 
-export const SERVICES: Service[] = [
+const SERVICES_FR: Service[] = [
   {
     slug: 'construction',
     number: '01',
@@ -93,11 +94,109 @@ export const SERVICES: Service[] = [
   },
 ];
 
-export function findServiceBySlug(slug: string): Service | undefined {
-  return SERVICES.find((service) => service.slug === slug);
+const SERVICES_EN: Service[] = [
+  {
+    slug: 'construction',
+    number: '01',
+    title: 'Construction project delivery',
+    shortTitle: 'Construction project delivery',
+    lead: 'From design to finishing: studies and costing, structural works, second fix, finishing and handover. One single point of contact from the first drawing to the keys.',
+    image: 'images/svc-1.png',
+    heroImage: 'images/svc-1.png',
+    prestations: [
+      { title: 'Studies & costing', description: 'Site surveys, feasibility, execution drawings and a detailed line-by-line quote.' },
+      { title: 'Structural works', description: 'Foundations, reinforced concrete structure, elevations and slabs as per calculation notes.' },
+      { title: 'Second fix', description: 'Partitions, plumbing, electrics, joinery and finishes.' },
+      { title: 'Finishing & handover', description: 'Painting, fittings, final cleaning and snag list clearance.' },
+    ],
+    process: [
+      { number: '01', title: 'Site visit & scoping', description: 'We visit the site to understand the brief and its constraints.' },
+      { number: '02', title: 'Detailed quote', description: 'Line-by-line costing, with a provisional schedule and payment milestones.' },
+      { number: '03', title: 'Supervised execution', description: 'A dedicated site manager, regular reporting and quality control at every phase.' },
+      { number: '04', title: 'Handover', description: 'Joint inspection, snag list clearance and delivery of the as-built file.' },
+    ],
+    gallery: ['images/proj-1.png', 'images/proj-4.png', 'images/proj-2.png'],
+  },
+  {
+    slug: 'renovation',
+    number: '02',
+    title: 'Renovation & fit-out',
+    shortTitle: 'Renovation & fit-out',
+    lead: 'Refurbishment of existing buildings, structural repairs, interior and exterior fit-out — organised to keep your business running.',
+    image: 'images/svc-2.png',
+    heroImage: 'images/svc-2.png',
+    prestations: [
+      { title: 'Diagnostics', description: 'Structural, utilities and moisture survey before any work starts.' },
+      { title: 'Structural repairs', description: 'Reinforcement, openings in load-bearing walls, floor and roof frame repairs.' },
+      { title: 'Interior fit-out', description: 'Space redistribution, kitchens, bathrooms, joinery and lighting.' },
+      { title: 'Exteriors', description: 'Facades, terraces, fencing, pools and landscaping.' },
+    ],
+    process: [
+      { number: '01', title: 'On-site diagnostics', description: 'We identify what can be kept and what needs to be redone.' },
+      { number: '02', title: 'Costed scenarios', description: 'Several levels of intervention, costed so you can decide based on your budget.' },
+      { number: '03', title: 'Phased works', description: 'We work zone by zone to keep your premises usable.' },
+      { number: '04', title: 'Clean handover', description: 'Full clean-up and a warranty on the completed works.' },
+    ],
+    gallery: ['images/hero-2.png', 'images/team-group.png', 'images/proj-3.png'],
+  },
+  {
+    slug: 'mobilite',
+    number: '03',
+    title: 'Ride-hailing, mobility & delivery',
+    shortTitle: 'Ride-hailing, mobility & delivery',
+    lead: 'Chauffeured transport, corporate shuttles and urban delivery. A tracked fleet and drivers trained in customer service.',
+    image: 'images/svc-3.png',
+    heroImage: 'images/svc-3.png',
+    prestations: [
+      { title: 'On-demand rides', description: 'One-off trips, airport transfers and hourly hire.' },
+      { title: 'Corporate shuttles', description: 'Staff pick-up on fixed routes, with punctuality tracking.' },
+      { title: 'Urban delivery', description: 'Parcels, documents and light materials within announced time slots.' },
+      { title: 'Vehicle hire', description: 'Dedicated vehicle and driver by the day, week or month.' },
+    ],
+    process: [
+      { number: '01', title: 'Your need', description: 'Routes, volumes, frequencies and time slots: we scope the expected service.' },
+      { number: '02', title: 'Proposal', description: 'Per-trip, flat-rate or monthly contract pricing.' },
+      { number: '03', title: 'Roll-out', description: 'Driver assignment, briefing and a trial on the first routes.' },
+      { number: '04', title: 'Follow-up', description: 'Regular review of punctuality, incidents and route changes.' },
+    ],
+    gallery: ['images/hero-3.png', 'images/proj-5.png', 'images/svc-3.png'],
+  },
+  {
+    slug: 'import',
+    number: '04',
+    title: 'Import of construction materials',
+    shortTitle: 'Import of materials',
+    lead: 'Sourcing and import from China, India and Turkey: tiling, marble, joinery, steel profiles. Quality control and delivery to the construction site.',
+    image: 'images/svc-4.png',
+    heroImage: 'images/svc-4.png',
+    prestations: [
+      { title: 'Sourcing', description: 'Identifying factories, samples and price negotiation at origin.' },
+      { title: 'Quality control', description: 'Pre-shipment inspection: references, quantities, packaging.' },
+      { title: 'Freight & customs', description: 'Documentation, incoterms, customs clearance and forwarder follow-up.' },
+      { title: 'Site delivery', description: 'Port reception, storage if needed and delivery as the site requires.' },
+    ],
+    process: [
+      { number: '01', title: 'Specification', description: 'References, quantities, expected quality and lead times.' },
+      { number: '02', title: 'Delivered quote', description: 'One all-in price: goods, freight, customs and local transport.' },
+      { number: '03', title: 'Production & control', description: 'Manufacturing follow-up and pre-shipment inspection.' },
+      { number: '04', title: 'Reception', description: 'Customs clearance, arrival inspection and on-site delivery.' },
+    ],
+    gallery: ['images/proj-5.png', 'images/svc-4.png', 'images/proj-2.png'],
+  },
+];
+
+const SERVICES_BY_LANG: Record<Lang, Service[]> = { fr: SERVICES_FR, en: SERVICES_EN };
+
+export function getServices(lang: Lang): Service[] {
+  return SERVICES_BY_LANG[lang];
 }
 
-export function nextService(slug: string): Service {
-  const index = SERVICES.findIndex((service) => service.slug === slug);
-  return SERVICES[(index + 1) % SERVICES.length];
+export function findServiceBySlug(slug: string, lang: Lang): Service | undefined {
+  return getServices(lang).find((service) => service.slug === slug);
+}
+
+export function nextService(slug: string, lang: Lang): Service {
+  const services = getServices(lang);
+  const index = services.findIndex((service) => service.slug === slug);
+  return services[(index + 1) % services.length];
 }

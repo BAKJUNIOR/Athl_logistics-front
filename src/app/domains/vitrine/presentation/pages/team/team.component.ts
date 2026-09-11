@@ -1,15 +1,19 @@
 // Page "Nos équipes" du site vitrine ATHL.
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { TranslocoPipe } from '@jsverse/transloco';
 import { RevealDirective } from '../../components/reveal.directive';
 import { StatCounterComponent } from '../../components/stat-counter/stat-counter.component';
-import { TEAM_MEMBERS } from '../../../infrastructure/data/team.data';
+import { getTeamMembers } from '../../../infrastructure/data/team.data';
+import { LanguageService } from '../../../../../core/services/language.service';
 
 @Component({
   selector: 'app-team',
-  imports: [RouterLink, RevealDirective, StatCounterComponent],
+  imports: [RouterLink, RevealDirective, StatCounterComponent, TranslocoPipe],
   templateUrl: './team.component.html',
 })
 export class TeamComponent {
-  readonly members = TEAM_MEMBERS;
+  private readonly languageService = inject(LanguageService);
+
+  readonly members = computed(() => getTeamMembers(this.languageService.lang()));
 }

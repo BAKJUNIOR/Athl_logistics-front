@@ -1,23 +1,28 @@
 // Page "Carrières" : liste des offres (recherche, filtres, accordéon, partage) + formulaire de candidature.
-import { Component, ElementRef, ViewChild, computed, signal } from '@angular/core';
-import { DatePipe } from '@angular/common';
-import { JobDomain } from '../../../domain/enum/job-domain.enum';
+import { Component, ElementRef, ViewChild, computed, inject, signal } from '@angular/core';
+import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
+import { JobDomain, jobDomainLabel } from '../../../domain/enum/job-domain.enum';
 import { JobOffer, deadlineStatus, daysUntilDeadline } from '../../../domain/job-offer.entity';
-import { JOB_OFFERS } from '../../../infrastructure/data/jobs.data';
+import { getJobOffers } from '../../../infrastructure/data/jobs.data';
 import { RevealDirective } from '../../components/reveal.directive';
 import { FileDropComponent } from '../../components/file-drop/file-drop.component';
 import { normalizeText } from '../../../../../core/utils/text.util';
+import { formatLocalizedDate } from '../../../../../core/utils/date.util';
+import { LanguageService } from '../../../../../core/services/language.service';
 
 const APPLY_FORM_ACTION = 'https://formsubmit.co/recrutement@athl.com';
 
 @Component({
   selector: 'app-careers',
-  imports: [RevealDirective, FileDropComponent, DatePipe],
+  imports: [RevealDirective, FileDropComponent, TranslocoPipe],
   templateUrl: './careers.component.html',
 })
 export class CareersComponent {
+  private readonly languageService = inject(LanguageService);
+  private readonly transloco = inject(TranslocoService);
+
   readonly domains = Object.values(JobDomain);
-  readonly jobs = JOB_OFFERS;
+  readonly jobs = computed(() => getJobOffers(this.languageService.lang()));
   readonly applyFormAction = APPLY_FORM_ACTION;
 
   readonly search = signal('');
@@ -29,7 +34,7 @@ export class CareersComponent {
   readonly filteredJobs = computed(() => {
     const query = normalizeText(this.search().trim());
     const tag = this.activeTag();
-    return this.jobs.filter((job) => {
+    return this.jobs().filter((job) => {
       const matchesTag = !tag || job.domain === tag;
       const matchesQuery =
         !query ||
@@ -38,15 +43,18 @@ export class CareersComponent {
     });
   });
 
-  readonly jobCountLabel = computed(() => {
-    const count = this.filteredJobs().length;
-    return `${count} ${count > 1 ? 'offres' : 'offre'}`;
-  });
+  readonly jobCountKey = computed(() =>
+    this.filteredJobs().length > 1 ? 'careers.filters.countPlural' : 'careers.filters.countSingular',
+  );
 
   protected readonly status = signal('');
   protected readonly isValid = signal(false);
 
   @ViewChild('candidature') private candidatureSection?: ElementRef<HTMLElement>;
+
+  domainLabel(domain: JobDomain): string {
+    return jobDomainLabel(domain, this.languageService.lang());
+  }
 
   isExpanded(job: JobOffer): boolean {
     return this.expanded().has(job.id);
@@ -74,12 +82,16 @@ export class CareersComponent {
     return deadlineStatus(job);
   }
 
-  deadlineNote(job: JobOffer): string {
+  formattedDate(iso: string): string {
+    return formatLocalizedDate(iso, this.languageService.lang());
+  }
+
+  deadlineNote(job: JobOffer): { key: string; days: number } | null {
     const days = daysUntilDeadline(job);
-    if (days < 0) return '';
-    if (days === 0) return 'dernier jour';
-    if (days <= 10) return `J-${days}`;
-    return '';
+    if (days < 0) return null;
+    if (days === 0) return { key: 'careers.deadline.lastDay', days };
+    if (days <= 10) return { key: 'careers.deadline.daysLeft', days };
+    return null;
   }
 
   applyTo(job: JobOffer): void {
@@ -92,7 +104,11 @@ export class CareersComponent {
 
   share(job: JobOffer): void {
     const url = `${location.origin}${location.pathname}#${job.id}`;
-    const payload = { title: `ATHL — ${job.title}`, text: `Offre d'emploi chez ATHL : ${job.title}`, url };
+    const payload = {
+      title: `ATHL — ${job.title}`,
+      text: this.transloco.translate('careers.share.text', { title: job.title }),
+      url,
+    };
 
     if (navigator.share) {
       navigator.share(payload).catch(() => {});
@@ -117,12 +133,12 @@ export class CareersComponent {
     );
     if (missing.length) {
       event.preventDefault();
-      this.status.set('Merci de renseigner les champs obligatoires (*).');
+      this.status.set(this.transloco.translate('common.form.missingRequired'));
       this.isValid.set(false);
       missing[0].focus();
       return;
     }
-    this.status.set('Envoi en cours…');
+    this.status.set(this.transloco.translate('common.form.sending'));
     this.isValid.set(true);
   }
 }

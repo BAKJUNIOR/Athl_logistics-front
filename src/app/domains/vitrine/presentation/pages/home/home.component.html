@@ -1,57 +1,49 @@
 <section class="hero" id="hero">
-  <h1 appReveal>L'expertise qui bâtit. <em>La logistique qui accélère.</em></h1>
-  <p [appReveal]="110">
-    Africa Talent Habitat &amp; Logistique : des équipes qualifiées, des méthodes éprouvées
-    et une chaîne d'approvisionnement maîtrisée, du premier plan à la livraison.
-  </p>
+  <h1 appReveal [innerHTML]="'home.hero.title' | transloco"></h1>
+  <p [appReveal]="110">{{ 'home.hero.subtitle' | transloco }}</p>
   <div class="hero-actions" [appReveal]="220">
-    <a class="btn btn--light" href="/devis" (click)="$event.preventDefault(); openQuote()">Demander un devis</a>
-    <a class="btn btn--ghost" routerLink="/projets">Voir nos réalisations</a>
+    <a class="btn btn--light" href="/devis" (click)="$event.preventDefault(); openQuote()">{{ 'common.requestQuote' | transloco }}</a>
+    <a class="btn btn--ghost" routerLink="/projets">{{ 'home.hero.seeWork' | transloco }}</a>
   </div>
 
   <div class="rail-wrap" [appReveal]="300">
     <div class="rail">
-      <div class="tile"><img src="images/hero-1.png" alt="Portrait d'un ouvrier" /></div>
-      <div class="tile"><img src="images/hero-2.png" alt="Détail de chantier" /></div>
-      <div class="tile tile--framed"><img src="images/hero-3.png" alt="Chef de chantier" /></div>
-      <div class="tile"><img src="images/proj-1.png" alt="Deux ouvriers sur site" /></div>
-      <div class="tile"><img src="images/proj-4.png" alt="Ingénieur et plans" /></div>
-      <div class="tile"><img src="images/svc-3.png" alt="Livraison" /></div>
-      <div class="tile"><img src="images/svc-4.png" alt="Matériaux importés" /></div>
-      <div class="tile"><img src="images/svc-2.png" alt="Chantier de rénovation" /></div>
+      <div class="tile"><img src="images/hero-1.png" [attr.alt]="'home.hero.alt.worker' | transloco" /></div>
+      <div class="tile"><img src="images/hero-2.png" [attr.alt]="'home.hero.alt.siteDetail' | transloco" /></div>
+      <div class="tile tile--framed"><img src="images/hero-3.png" [attr.alt]="'home.hero.alt.siteManager' | transloco" /></div>
+      <div class="tile"><img src="images/proj-1.png" [attr.alt]="'home.hero.alt.twoWorkers' | transloco" /></div>
+      <div class="tile"><img src="images/proj-4.png" [attr.alt]="'home.hero.alt.engineer' | transloco" /></div>
+      <div class="tile"><img src="images/svc-3.png" [attr.alt]="'home.hero.alt.delivery' | transloco" /></div>
+      <div class="tile"><img src="images/svc-4.png" [attr.alt]="'home.hero.alt.materials' | transloco" /></div>
+      <div class="tile"><img src="images/svc-2.png" [attr.alt]="'home.hero.alt.renovationSite' | transloco" /></div>
     </div>
   </div>
 </section>
 
 <section class="split" id="workforce">
   <div class="frame" appReveal>
-    <img src="images/team-lead.png" alt="Deux responsables sur le chantier" />
+    <img src="images/team-lead.png" [attr.alt]="'home.workforce.imageAlt' | transloco" />
   </div>
 
   <div class="split__col" [appReveal]="140">
     <div>
-      <h2>Nous assumons le chantier. Nous livrons des résultats plus solides</h2>
-      <p class="lead">
-        Africa Talent Habitat &amp; Logistique réunit des professionnels expérimentés, des méthodes
-        éprouvées et une culture de la responsabilité pour livrer des projets qui traversent le temps.
-        De la construction et la rénovation à la mobilité et à l'importation de matériaux, nos équipes
-        travaillent avec clarté, rigueur et savoir-faire.
-      </p>
-      <a class="btn btn--light btn--block" routerLink="/a-propos">En savoir plus</a>
+      <h2>{{ 'home.workforce.title' | transloco }}</h2>
+      <p class="lead">{{ 'home.workforce.lead' | transloco }}</p>
+      <a class="btn btn--light btn--block" routerLink="/a-propos">{{ 'common.learnMore' | transloco }}</a>
     </div>
 
     <div class="stats">
       <div class="stat">
         <div class="stat__num"><app-stat-counter [to]="2193" suffix="+" /></div>
-        <div class="stat__label">Chantiers livrés en toute sécurité et dans les délais</div>
+        <div class="stat__label">{{ 'common.stats.sitesDelivered' | transloco }}</div>
       </div>
       <div class="stat">
         <div class="stat__num"><app-stat-counter [to]="3.16" [decimals]="2" suffix=" M€" /></div>
-        <div class="stat__label">Valeur de projets façonnée par une planification rigoureuse</div>
+        <div class="stat__label">{{ 'common.stats.projectValue' | transloco }}</div>
       </div>
       <div class="stat">
         <div class="stat__num"><app-stat-counter [to]="121.2" [decimals]="1" suffix=" M€" /></div>
-        <div class="stat__label">Valeur d'actifs bâtie en commercial et résidentiel</div>
+        <div class="stat__label">{{ 'common.stats.assetValue' | transloco }}</div>
       </div>
     </div>
   </div>
@@ -59,35 +51,35 @@
 
 <section class="projects" id="projects">
   <div class="projects__intro" appReveal>
-    <h2>Des chantiers en cours partout dans le pays</h2>
-    <p>Découvrez ce que nos équipes construisent en ce moment</p>
+    <h2>{{ 'home.projects.title' | transloco }}</h2>
+    <p>{{ 'home.projects.subtitle' | transloco }}</p>
     <div class="locate">
-      <div class="locate__field">Abidjan, Côte d'Ivoire</div>
-      <a class="btn btn--light" routerLink="/projets">Chantier en direct</a>
+      <div class="locate__field">{{ 'common.location' | transloco }}</div>
+      <a class="btn btn--light" routerLink="/projets">{{ 'home.projects.liveSite' | transloco }}</a>
     </div>
   </div>
 
   <div class="mosaic">
-    <div class="m1" [appReveal]="80"><img src="images/proj-1.png" alt="Structure métallique" /></div>
-    <div class="m2" [appReveal]="180"><img src="images/proj-2.png" alt="Équipe et grue" /></div>
-    <div class="m3" [appReveal]="280"><img src="images/proj-3.png" alt="Équipe étudiant les plans" /></div>
-    <div class="m4" [appReveal]="360"><img src="images/proj-4.png" alt="Chantier en hauteur" /></div>
-    <div class="m5" [appReveal]="440"><img src="images/proj-5.png" alt="Briefing d'équipe" /></div>
+    <div class="m1" [appReveal]="80"><img src="images/proj-1.png" [attr.alt]="'home.projects.alt.steelStructure' | transloco" /></div>
+    <div class="m2" [appReveal]="180"><img src="images/proj-2.png" [attr.alt]="'home.projects.alt.teamAndCrane' | transloco" /></div>
+    <div class="m3" [appReveal]="280"><img src="images/proj-3.png" [attr.alt]="'home.projects.alt.teamReviewingPlans' | transloco" /></div>
+    <div class="m4" [appReveal]="360"><img src="images/proj-4.png" [attr.alt]="'home.projects.alt.highRiseSite' | transloco" /></div>
+    <div class="m5" [appReveal]="440"><img src="images/proj-5.png" [attr.alt]="'home.projects.alt.teamBriefing' | transloco" /></div>
   </div>
 </section>
 
 <section class="services" id="safety">
-  <h2 appReveal>Nos services</h2>
-  <p [appReveal]="100">Du chantier à la logistique : quatre métiers pour mener vos projets de bout en bout.</p>
+  <h2 appReveal>{{ 'home.services.title' | transloco }}</h2>
+  <p [appReveal]="100">{{ 'home.services.subtitle' | transloco }}</p>
 
   <div class="cards">
-    @for (service of services; track service.slug; let i = $index) {
+    @for (service of services(); track service.slug; let i = $index) {
       <article class="card" [appReveal]="60 + i * 80">
         <img [src]="service.image" [alt]="service.title" />
         <div class="card__scrim"></div>
         <div class="card__foot">
           <div class="card__title">{{ service.title }}</div>
-          <a class="card__cta" [routerLink]="['/services', service.slug]">En savoir plus <span>&rarr;</span></a>
+          <a class="card__cta" [routerLink]="['/services', service.slug]">{{ 'common.learnMore' | transloco }} <span>&rarr;</span></a>
         </div>
       </article>
     }
@@ -98,10 +90,10 @@
 
 <app-cta-banner
   appReveal
-  title="Besoin de conseils ou d'un devis ?"
-  text="Pour plus d'informations, contactez-nous :"
+  [title]="'common.cta.needAdviceTitle' | transloco"
+  [text]="'common.cta.contactUs' | transloco"
   [showPhones]="true"
 >
-  <a class="btn btn--light" href="/devis" (click)="$event.preventDefault(); openQuote()">Demander un devis</a>
-  <a class="btn btn--ghost" routerLink="/projets">Nos réalisations</a>
+  <a class="btn btn--light" href="/devis" (click)="$event.preventDefault(); openQuote()">{{ 'common.requestQuote' | transloco }}</a>
+  <a class="btn btn--ghost" routerLink="/projets">{{ 'common.ourWork' | transloco }}</a>
 </app-cta-banner>

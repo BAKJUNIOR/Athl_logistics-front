@@ -1,8 +1,9 @@
-// Source de données statique pour le domaine "JobOffer".
+// Source de données statique pour le domaine "JobOffer", en français et en anglais.
 import { JobDomain } from '../../domain/enum/job-domain.enum';
 import { JobOffer } from '../../domain/job-offer.entity';
+import { Lang } from '../../../../core/services/language.service';
 
-export const JOB_OFFERS: JobOffer[] = [
+const JOB_OFFERS_FR: JobOffer[] = [
   {
     id: 'gros-oeuvre',
     domain: JobDomain.Chantier,
@@ -136,3 +137,144 @@ export const JOB_OFFERS: JobOffer[] = [
     contactPhone: '+2250709993347',
   },
 ];
+
+const JOB_OFFERS_EN: JobOffer[] = [
+  {
+    id: 'gros-oeuvre',
+    domain: JobDomain.Chantier,
+    title: 'Masons, formworkers, steel fixers',
+    description: 'Structural works. Site experience required, certifications a plus.',
+    meta: 'Abidjan and upcountry · fixed-term site contract · full time · 2 years minimum',
+    publishedAt: '2026-09-01',
+    deadline: '2026-09-30',
+    missions: [
+      'Setting out, formwork and pouring of reinforced concrete works',
+      'Steel fixing according to execution drawings and calculation notes',
+      'Reading drawings and following level references',
+      'Strict application of safety rules and use of PPE',
+    ],
+    profile: [
+      'Proven experience in building structural works',
+      'Proficiency with traditional and modular formwork',
+      'Rigour, punctuality and team spirit',
+      'Working-at-height certification a plus',
+    ],
+    contactPhone: '+2250709993347',
+  },
+  {
+    id: 'encadrement',
+    domain: JobDomain.Chantier,
+    title: 'Site managers & works supervisors',
+    description: 'Team supervision, schedule follow-up, quality and safety.',
+    meta: 'Abidjan · permanent contract · full time · 5 years minimum',
+    publishedAt: '2026-08-25',
+    deadline: '2026-09-26',
+    missions: [
+      'Organise and supervise teams and subcontractors day to day',
+      'Manage the schedule, supplies and work pace',
+      'Control execution quality and clear the snag list',
+      'Lead on-site safety and report to the client',
+    ],
+    profile: [
+      'Construction training (BTS, degree or equivalent) or equivalent experience',
+      'Reading drawings, quantity surveying and budget follow-up',
+      'Natural authority and negotiation skills',
+      'Driving licence and mobility across our sites',
+    ],
+    contactPhone: '+2250709993347',
+  },
+  {
+    id: 'second-oeuvre',
+    domain: JobDomain.SecondOeuvre,
+    title: 'Tilers, painters, joiners, electricians',
+    description: 'Finishing and interior fit-out on residential and commercial projects.',
+    meta: 'Abidjan · fixed-term site contract · full time · 2 years minimum',
+    publishedAt: '2026-09-04',
+    deadline: '2026-10-10',
+    missions: [
+      'Carry out finishing works to the architect’s specifications',
+      'Install flooring, joinery and electrical fittings',
+      'Protect completed works',
+      'Report non-conformities before handover',
+    ],
+    profile: [
+      'Proficiency in at least one finishing trade',
+      'Attention to detail and a clean work area',
+      'Autonomous on day-to-day tasks',
+      'Electrical certification for relevant roles',
+    ],
+    contactPhone: '+2250709993347',
+  },
+  {
+    id: 'mobilite',
+    domain: JobDomain.Mobilite,
+    title: 'Ride-hailing drivers & couriers',
+    description: 'Valid licence, good knowledge of Abidjan, customer-oriented.',
+    meta: 'Abidjan · permanent contract or partnership · full time · 2 years driving',
+    publishedAt: '2026-09-08',
+    deadline: '2026-09-22',
+    missions: [
+      'Carry out ride-hailing trips and corporate shuttle runs',
+      'Complete urban deliveries within announced time slots',
+      'Keep the vehicle clean and properly maintained',
+      'Report incidents and issues to the fleet coordinator',
+    ],
+    profile: [
+      'Valid driving licence and clean record',
+      'Excellent knowledge of Abidjan and its roads',
+      'Well-presented with a customer-service mindset',
+      'Comfortable with navigation apps',
+    ],
+    contactPhone: '+2250709993347',
+  },
+  {
+    id: 'logistique',
+    domain: JobDomain.Logistique,
+    title: 'Logistics & import officers',
+    description: 'Order follow-up, customs clearance, reception and delivery of materials.',
+    meta: 'Abidjan · port area · permanent contract · full time · 3 years minimum',
+    publishedAt: '2026-08-18',
+    deadline: '2026-09-19',
+    missions: [
+      'Track supplier orders from China, India and Turkey',
+      'Prepare customs clearance files and follow up with forwarders',
+      'Check quantities and quality on reception',
+      'Organise delivery to the construction sites',
+    ],
+    profile: [
+      'Experience in freight forwarding, import or supply chain',
+      'Proficiency with customs documents and incoterms',
+      'Good written English',
+      'Comfortable with Excel and tracking tools',
+    ],
+    contactPhone: '+2250709993347',
+  },
+  {
+    id: 'support',
+    domain: JobDomain.Support,
+    title: 'Administrative roles',
+    description: 'Accounting, purchasing, communications and HR management.',
+    meta: 'Abidjan · head office · permanent contract · full time · 2 years minimum',
+    publishedAt: '2026-09-09',
+    deadline: '2026-10-15',
+    missions: [
+      'Keep day-to-day accounting and prepare filings',
+      'Manage purchasing and supplier relationships',
+      'Maintain personnel files and payroll',
+      'Contribute to the group’s communications',
+    ],
+    profile: [
+      'Training in accounting, management or communications',
+      'Rigour, discretion and organisational skills',
+      'Proficiency with office software',
+      'Good written and verbal communication',
+    ],
+    contactPhone: '+2250709993347',
+  },
+];
+
+const JOBS_BY_LANG: Record<Lang, JobOffer[]> = { fr: JOB_OFFERS_FR, en: JOB_OFFERS_EN };
+
+export function getJobOffers(lang: Lang): JobOffer[] {
+  return JOBS_BY_LANG[lang];
+}

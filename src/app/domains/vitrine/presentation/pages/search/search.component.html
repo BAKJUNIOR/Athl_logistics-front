@@ -1,7 +1,7 @@
 <section class="phero">
-  <div class="phero__eyebrow">Recherche</div>
-  <h1>Rechercher sur le site</h1>
-  <p>Services, équipe, offres d'emploi et pages du site ATHL.</p>
+  <div class="phero__eyebrow">{{ 'search.eyebrow' | transloco }}</div>
+  <h1>{{ 'search.title' | transloco }}</h1>
+  <p>{{ 'search.subtitle' | transloco }}</p>
 </section>
 
 <section class="search-page">
@@ -9,21 +9,21 @@
     <span class="jobsearch__icon" aria-hidden="true">&#9906;</span>
     <input
       type="search"
-      placeholder="Rechercher un service, un métier, une page…"
-      aria-label="Rechercher sur le site"
+      [placeholder]="'search.placeholder' | transloco"
+      [attr.aria-label]="'search.eyebrow' | transloco"
       [value]="query()"
       (input)="query.set($any($event.target).value)"
     />
     @if (query()) {
-      <button class="jobsearch__clear" type="button" aria-label="Effacer la recherche" (click)="clear()">&#215;</button>
+      <button class="jobsearch__clear" type="button" [attr.aria-label]="'common.clearSearch' | transloco" (click)="clear()">&#215;</button>
     }
   </div>
 
   @if (query().trim()) {
-    <div class="jobcount">{{ countLabel() }}</div>
+    <div class="jobcount">{{ countKey() | transloco: { count: results().length } }}</div>
 
     @if (!results().length) {
-      <p class="jobempty">Aucun résultat pour « {{ query() }} ». Essayez un autre terme ou consultez nos <a routerLink="/services">services</a>.</p>
+      <p class="jobempty">{{ 'search.noResults' | transloco: { query: query() } }} <a routerLink="/services">{{ 'common.nav.services' | transloco }}</a>.</p>
     }
 
     @for (group of resultsByCategory(); track group.category) {

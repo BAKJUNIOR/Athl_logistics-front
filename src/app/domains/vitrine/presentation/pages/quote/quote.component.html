@@ -1,7 +1,7 @@
 <section class="phero">
-  <div class="phero__eyebrow" appReveal>Devis gratuit</div>
-  <h1 [appReveal]="80">Demander un devis</h1>
-  <p [appReveal]="160">Quatre champs suffisent. Nous vous rappelons sous 48 h ouvrées.</p>
+  <div class="phero__eyebrow" appReveal>{{ 'quote.eyebrow' | transloco }}</div>
+  <h1 [appReveal]="80">{{ 'quote.title' | transloco }}</h1>
+  <p [appReveal]="160">{{ 'quote.subtitle' | transloco }}</p>
 </section>
 
 <section class="devis">
@@ -20,49 +20,49 @@
     <input type="hidden" name="_template" value="table" />
 
     <div class="field field--full">
-      <label for="q-service">Service concerné <span class="req">*</span></label>
+      <label for="q-service">{{ 'quote.form.service' | transloco }} <span class="req">*</span></label>
       <select id="q-service" name="Service" required>
-        <option value="">Choisir un service…</option>
-        <option value="Réalisation de projets de construction">Réalisation de projets de construction</option>
-        <option value="Rénovation &amp; aménagement">Rénovation &amp; aménagement</option>
-        <option value="VTC, mobilité &amp; livraison">VTC, mobilité &amp; livraison</option>
-        <option value="Importation de matériaux">Importation de matériaux de construction</option>
+        <option value="">{{ 'quote.form.chooseService' | transloco }}</option>
+        <option value="Réalisation de projets de construction">{{ 'common.services.construction' | transloco }}</option>
+        <option value="Rénovation &amp; aménagement">{{ 'common.services.renovation' | transloco }}</option>
+        <option value="VTC, mobilité &amp; livraison">{{ 'common.services.mobility' | transloco }}</option>
+        <option value="Importation de matériaux">{{ 'common.services.import' | transloco }}</option>
       </select>
     </div>
 
     <div class="field">
-      <label for="q-nom">Nom et prénoms <span class="req">*</span></label>
-      <input id="q-nom" name="Nom" type="text" required autocomplete="name" placeholder="Ex. Konan Yao" />
+      <label for="q-nom">{{ 'common.form.fullName' | transloco }} <span class="req">*</span></label>
+      <input id="q-nom" name="Nom" type="text" required autocomplete="name" [placeholder]="'common.form.fullNamePlaceholder' | transloco" />
     </div>
     <div class="field">
-      <label for="q-tel">Téléphone <span class="req">*</span></label>
+      <label for="q-tel">{{ 'common.form.phone' | transloco }} <span class="req">*</span></label>
       <input id="q-tel" name="Téléphone" type="tel" required autocomplete="tel" placeholder="+225 07 00 00 00 00" />
     </div>
 
     <div class="field field--full">
-      <label for="q-desc">Votre projet <span class="req">*</span></label>
-      <textarea id="q-desc" name="Description" rows="5" required placeholder="Nature des travaux, lieu, surface, délais souhaités…"></textarea>
+      <label for="q-desc">{{ 'quote.form.project' | transloco }} <span class="req">*</span></label>
+      <textarea id="q-desc" name="Description" rows="5" required [placeholder]="'quote.form.projectPlaceholder' | transloco"></textarea>
     </div>
 
     <div class="field field--full">
-      <label for="q-files">Plans ou photos <span class="opt">(facultatif)</span></label>
+      <label for="q-files">{{ 'quote.form.files' | transloco }} <span class="opt">({{ 'common.form.optional' | transloco }})</span></label>
       <app-file-drop
         name="Documents"
         [multiple]="true"
-        label="Déposez vos fichiers ici ou"
-        browseLabel="parcourez vos fichiers"
-        hint="PDF, DOC, JPG, PNG ou ZIP — 5 Mo au total"
+        [label]="'quote.form.dropLabel' | transloco"
+        [browseLabel]="'quote.form.dropBrowse' | transloco"
+        [hint]="'quote.form.dropHint' | transloco"
       />
     </div>
 
     <div class="field field--full check">
       <input id="q-ok" name="Consentement" type="checkbox" value="Oui" required />
-      <label for="q-ok">J'autorise ATHL à me contacter au sujet de cette demande. <span class="req">*</span></label>
+      <label for="q-ok">{{ 'quote.form.consent' | transloco }} <span class="req">*</span></label>
     </div>
 
     <div class="field field--full form__foot">
-      <button class="btn btn--light" type="submit">Envoyer ma demande</button>
-      <a class="btn btn--ghost" href="tel:+2250778095858">Appeler : +225 07 78 09 58 58</a>
+      <button class="btn btn--light" type="submit">{{ 'quote.form.submit' | transloco }}</button>
+      <a class="btn btn--ghost" href="tel:+2250778095858">{{ 'common.form.callUs' | transloco }} : +225 07 78 09 58 58</a>
     </div>
 
     @if (status(); as message) {

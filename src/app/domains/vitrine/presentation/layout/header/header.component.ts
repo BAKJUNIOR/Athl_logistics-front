@@ -1,12 +1,14 @@
-// En-tête du site vitrine : logo, navigation, recherche, bouton devis (ouvre la modal), thème clair/sombre et menu mobile.
+// En-tête du site vitrine : logo, navigation, recherche, langue, thème, bouton devis et menu mobile.
 import { Component, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { TranslocoPipe } from '@jsverse/transloco';
 import { QuoteModalService } from '../../services/quote-modal.service';
 import { ThemeService } from '../../../../../core/services/theme.service';
+import { LanguageService } from '../../../../../core/services/language.service';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, TranslocoPipe],
   template: `
     <header class="header">
       <a class="logo" routerLink="/">
@@ -14,25 +16,30 @@ import { ThemeService } from '../../../../../core/services/theme.service';
       </a>
 
       <nav class="nav">
-        <a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }">Accueil</a>
-        <a routerLink="/equipe" routerLinkActive="is-active">Nos équipes</a>
-        <a routerLink="/projets" routerLinkActive="is-active">Projets</a>
-        <a routerLink="/services" routerLinkActive="is-active">Services</a>
-        <a routerLink="/carrieres" routerLinkActive="is-active">Carrières</a>
-        <a routerLink="/a-propos" routerLinkActive="is-active">À propos</a>
+        <a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }">{{ 'common.nav.home' | transloco }}</a>
+        <a routerLink="/equipe" routerLinkActive="is-active">{{ 'common.nav.team' | transloco }}</a>
+        <a routerLink="/projets" routerLinkActive="is-active">{{ 'common.nav.projects' | transloco }}</a>
+        <a routerLink="/services" routerLinkActive="is-active">{{ 'common.nav.services' | transloco }}</a>
+        <a routerLink="/carrieres" routerLinkActive="is-active">{{ 'common.nav.careers' | transloco }}</a>
+        <a routerLink="/a-propos" routerLinkActive="is-active">{{ 'common.nav.about' | transloco }}</a>
       </nav>
 
       <div class="header__actions">
-        <a class="icon-btn" routerLink="/recherche" routerLinkActive="is-active" aria-label="Rechercher sur le site">
+        <a class="icon-btn" routerLink="/recherche" routerLinkActive="is-active" [attr.aria-label]="'search.eyebrow' | transloco">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="11" cy="11" r="7" />
             <line x1="21" y1="21" x2="16.2" y2="16.2" />
           </svg>
         </a>
+        <div class="lang-toggle" role="group" [attr.aria-label]="'common.chooseLanguage' | transloco">
+          <button type="button" [class.is-on]="languageService.lang() === 'fr'" (click)="languageService.setLang('fr')">FR</button>
+          <span aria-hidden="true">/</span>
+          <button type="button" [class.is-on]="languageService.lang() === 'en'" (click)="languageService.setLang('en')">EN</button>
+        </div>
         <button
           class="icon-btn"
           type="button"
-          [attr.aria-label]="themeService.theme() === 'dark' ? 'Activer le thème clair' : 'Activer le thème sombre'"
+          [attr.aria-label]="themeService.theme() === 'dark' ? ('common.theme.enableLight' | transloco) : ('common.theme.enableDark' | transloco)"
           (click)="themeService.toggle()"
         >
           @if (themeService.theme() === 'dark') {
@@ -46,11 +53,11 @@ import { ThemeService } from '../../../../../core/services/theme.service';
             </svg>
           }
         </button>
-        <a class="btn btn--light btn--sm" href="/devis" (click)="openQuote($event)">Demander un devis</a>
+        <a class="btn btn--light btn--sm" href="/devis" (click)="openQuote($event)">{{ 'common.requestQuote' | transloco }}</a>
         <button
           class="burger"
           type="button"
-          aria-label="Menu"
+          [attr.aria-label]="'common.menu' | transloco"
           [attr.aria-expanded]="menuOpen()"
           aria-controls="mobile-menu"
           (click)="menuOpen.set(!menuOpen())"
@@ -61,21 +68,29 @@ import { ThemeService } from '../../../../../core/services/theme.service';
     </header>
 
     <nav class="mobile-menu" id="mobile-menu" [hidden]="!menuOpen()">
-      <a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }" (click)="menuOpen.set(false)">Accueil</a>
-      <a routerLink="/equipe" routerLinkActive="is-active" (click)="menuOpen.set(false)">Nos équipes</a>
-      <a routerLink="/projets" routerLinkActive="is-active" (click)="menuOpen.set(false)">Projets</a>
-      <a routerLink="/services" routerLinkActive="is-active" (click)="menuOpen.set(false)">Services</a>
-      <a routerLink="/carrieres" routerLinkActive="is-active" (click)="menuOpen.set(false)">Carrières</a>
-      <a routerLink="/a-propos" routerLinkActive="is-active" (click)="menuOpen.set(false)">À propos</a>
-      <a routerLink="/contact" (click)="menuOpen.set(false)">Contact</a>
-      <a routerLink="/recherche" routerLinkActive="is-active" (click)="menuOpen.set(false)">Rechercher</a>
-      <a href="/devis" (click)="openQuote($event); menuOpen.set(false)">Demander un devis</a>
+      <a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }" (click)="menuOpen.set(false)">{{ 'common.nav.home' | transloco }}</a>
+      <a routerLink="/equipe" routerLinkActive="is-active" (click)="menuOpen.set(false)">{{ 'common.nav.team' | transloco }}</a>
+      <a routerLink="/projets" routerLinkActive="is-active" (click)="menuOpen.set(false)">{{ 'common.nav.projects' | transloco }}</a>
+      <a routerLink="/services" routerLinkActive="is-active" (click)="menuOpen.set(false)">{{ 'common.nav.services' | transloco }}</a>
+      <a routerLink="/carrieres" routerLinkActive="is-active" (click)="menuOpen.set(false)">{{ 'common.nav.careers' | transloco }}</a>
+      <a routerLink="/a-propos" routerLinkActive="is-active" (click)="menuOpen.set(false)">{{ 'common.nav.about' | transloco }}</a>
+      <a routerLink="/contact" (click)="menuOpen.set(false)">{{ 'common.nav.contact' | transloco }}</a>
+      <a routerLink="/recherche" routerLinkActive="is-active" (click)="menuOpen.set(false)">{{ 'common.nav.search' | transloco }}</a>
+      <a href="/devis" (click)="openQuote($event); menuOpen.set(false)">{{ 'common.requestQuote' | transloco }}</a>
       <div class="theme-toggle-row">
-        <span>Thème {{ themeService.theme() === 'dark' ? 'sombre' : 'clair' }}</span>
+        <span>{{ 'common.language' | transloco }}</span>
+        <div class="lang-toggle" role="group" [attr.aria-label]="'common.chooseLanguage' | transloco">
+          <button type="button" [class.is-on]="languageService.lang() === 'fr'" (click)="languageService.setLang('fr')">FR</button>
+          <span aria-hidden="true">/</span>
+          <button type="button" [class.is-on]="languageService.lang() === 'en'" (click)="languageService.setLang('en')">EN</button>
+        </div>
+      </div>
+      <div class="theme-toggle-row">
+        <span>{{ themeService.theme() === 'dark' ? ('common.theme.dark' | transloco) : ('common.theme.light' | transloco) }}</span>
         <button
           class="icon-btn"
           type="button"
-          [attr.aria-label]="themeService.theme() === 'dark' ? 'Activer le thème clair' : 'Activer le thème sombre'"
+          [attr.aria-label]="themeService.theme() === 'dark' ? ('common.theme.enableLight' | transloco) : ('common.theme.enableDark' | transloco)"
           (click)="themeService.toggle()"
         >
           @if (themeService.theme() === 'dark') {
@@ -96,6 +111,7 @@ import { ThemeService } from '../../../../../core/services/theme.service';
 export class HeaderComponent {
   private readonly quoteModal = inject(QuoteModalService);
   protected readonly themeService = inject(ThemeService);
+  protected readonly languageService = inject(LanguageService);
 
   readonly menuOpen = signal(false);
 

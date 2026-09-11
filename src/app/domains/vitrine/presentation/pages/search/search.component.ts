@@ -1,24 +1,29 @@
 // Page "Recherche" : recherche interne simple sur le contenu du site (pages, services, équipe, emplois).
 import { Component, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { SEARCH_INDEX } from '../../../infrastructure/data/search-index.data';
+import { TranslocoPipe } from '@jsverse/transloco';
+import { getSearchIndex } from '../../../infrastructure/data/search-index.data';
 import { SearchCategory } from '../../../domain/search-result.entity';
 import { normalizeText } from '../../../../../core/utils/text.util';
+import { LanguageService } from '../../../../../core/services/language.service';
 
 @Component({
   selector: 'app-search',
-  imports: [RouterLink],
+  imports: [RouterLink, TranslocoPipe],
   templateUrl: './search.component.html',
 })
 export class SearchComponent {
   private readonly route = inject(ActivatedRoute);
+  private readonly languageService = inject(LanguageService);
 
   readonly query = signal(this.route.snapshot.queryParamMap.get('q') ?? '');
+
+  private readonly index = computed(() => getSearchIndex(this.languageService.lang()));
 
   readonly results = computed(() => {
     const q = normalizeText(this.query().trim());
     if (!q) return [];
-    return SEARCH_INDEX.filter((entry) => normalizeText(`${entry.title} ${entry.excerpt}`).includes(q));
+    return this.index().filter((entry) => normalizeText(`${entry.title} ${entry.excerpt}`).includes(q));
   });
 
   readonly resultsByCategory = computed(() => {
@@ -31,10 +36,7 @@ export class SearchComponent {
     return Array.from(groups.entries()).map(([category, items]) => ({ category, items }));
   });
 
-  readonly countLabel = computed(() => {
-    const count = this.results().length;
-    return `${count} résultat${count > 1 ? 's' : ''}`;
-  });
+  readonly countKey = computed(() => (this.results().length > 1 ? 'search.resultsPlural' : 'search.resultsSingular'));
 
   clear(): void {
     this.query.set('');

@@ -1,12 +1,12 @@
 <section class="phero">
-  <div class="phero__eyebrow" appReveal>Nos équipes</div>
-  <h1 [appReveal]="80">Des visages derrière chaque projet</h1>
-  <p [appReveal]="160">Une direction proche du terrain, joignable et engagée sur chacun de nos chantiers comme sur nos opérations logistiques.</p>
+  <div class="phero__eyebrow" appReveal>{{ 'team.eyebrow' | transloco }}</div>
+  <h1 [appReveal]="80">{{ 'team.title' | transloco }}</h1>
+  <p [appReveal]="160">{{ 'team.subtitle' | transloco }}</p>
 </section>
 
 <section class="team">
   <div class="team__grid">
-    @for (member of members; track member.name; let i = $index) {
+    @for (member of members(); track member.name; let i = $index) {
       <article class="member" [appReveal]="60 + i * 90">
         <div class="member__media"><img [src]="member.photo" [alt]="member.name" loading="lazy" /></div>
         <div class="member__body">
@@ -20,26 +20,26 @@
 
 <section class="split split--rev">
   <div class="frame" appReveal>
-    <img src="images/team-lead.png" alt="Responsables sur le chantier" loading="lazy" />
+    <img src="images/team-lead.png" [attr.alt]="'team.groundTeamsImageAlt' | transloco" loading="lazy" />
   </div>
   <div class="split__col" [appReveal]="140">
     <div>
-      <h2>Nos équipes terrain</h2>
-      <p class="lead">Ouvriers qualifiés, chefs de chantier, chauffeurs et logisticiens : chaque métier est encadré, formé et suivi. C'est cette organisation qui nous permet de tenir les délais sans transiger sur la sécurité.</p>
-      <a class="btn btn--light btn--block" routerLink="/carrieres">Rejoindre nos équipes</a>
+      <h2>{{ 'team.groundTeams.title' | transloco }}</h2>
+      <p class="lead">{{ 'team.groundTeams.lead' | transloco }}</p>
+      <a class="btn btn--light btn--block" routerLink="/carrieres">{{ 'team.joinTeams' | transloco }}</a>
     </div>
     <div class="stats">
       <div class="stat">
         <div class="stat__num"><app-stat-counter [to]="2193" suffix="+" /></div>
-        <div class="stat__label">Chantiers livrés en toute sécurité et dans les délais</div>
+        <div class="stat__label">{{ 'common.stats.sitesDelivered' | transloco }}</div>
       </div>
       <div class="stat">
         <div class="stat__num"><app-stat-counter [to]="3.16" [decimals]="2" suffix=" M€" /></div>
-        <div class="stat__label">Valeur de projets façonnée par une planification rigoureuse</div>
+        <div class="stat__label">{{ 'common.stats.projectValue' | transloco }}</div>
       </div>
       <div class="stat">
         <div class="stat__num"><app-stat-counter [to]="121.2" [decimals]="1" suffix=" M€" /></div>
-        <div class="stat__label">Valeur d'actifs bâtie en commercial et résidentiel</div>
+        <div class="stat__label">{{ 'common.stats.assetValue' | transloco }}</div>
       </div>
     </div>
   </div>

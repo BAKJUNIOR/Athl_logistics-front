@@ -130,6 +130,13 @@ img { display: block; max-width: 100%; }
 }
 .icon-btn:hover { background: var(--surface-3); border-color: var(--line-strong); color: var(--text); }
 .icon-btn.is-active { color: var(--accent); }
+
+/* Sélecteur de langue FR/EN */
+.lang-toggle { display: flex; align-items: center; gap: 5px; font-size: 12.5px; font-weight: 500; color: var(--muted-2); flex: 0 0 auto; }
+.lang-toggle button { background: none; border: 0; padding: 4px 2px; cursor: pointer; color: var(--muted-2); font: inherit; transition: color .2s ease; }
+.lang-toggle button:hover { color: var(--text); }
+.lang-toggle button.is-on { color: var(--text); font-weight: 700; }
+.mobile-menu .theme-toggle-row .lang-toggle { color: var(--text-dim); }
 .icon-btn svg { width: 18px; height: 18px; }
 .mobile-menu .theme-toggle-row {
   display: flex; align-items: center; justify-content: space-between;

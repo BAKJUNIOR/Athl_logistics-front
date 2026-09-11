@@ -1,7 +1,8 @@
-// Source de données statique pour le domaine "Testimonial".
+// Source de données statique pour le domaine "Testimonial". Les noms ne sont pas traduits ; texte et fonction le sont.
 import { Testimonial } from '../../domain/testimonial.entity';
+import { Lang } from '../../../../core/services/language.service';
 
-export const TESTIMONIALS: Testimonial[] = [
+const TESTIMONIALS_FR: Testimonial[] = [
   {
     photo: 'images/team-dg.jpg',
     initials: 'EN',
@@ -31,3 +32,40 @@ export const TESTIMONIALS: Testimonial[] = [
     role: 'Propriétaire',
   },
 ];
+
+const TESTIMONIALS_EN: Testimonial[] = [
+  {
+    photo: 'images/team-dg.jpg',
+    initials: 'EN',
+    text: '“From the first visit to handover, everything was documented and on budget. The teams treated the site as if it were their own.”',
+    name: 'Emmanuel N’GUESSAN,',
+    role: 'Group Chief Executive Officer',
+  },
+  {
+    photo: 'images/team-comm.jpg',
+    initials: 'BC',
+    text: '“The team exceeded our expectations at every stage. Clear communication, the schedule was met, and a building our teams are proud of.”',
+    name: 'Beugré Alain Cédric,',
+    role: 'Group Communications Manager',
+  },
+  {
+    photo: 'images/team-admin.jpg',
+    initials: 'ET',
+    text: '“ATHL carried out a complex renovation with professionalism and precision. Their attention to detail and safety culture really make the difference.”',
+    name: 'Elisabeth TUO,',
+    role: 'Group Administration & Accounting Manager',
+  },
+  {
+    photo: 'images/proj-4.png',
+    initials: 'BO',
+    text: '“They fixed structural issues we had been living with for years, without ever interrupting our business. A rare kind of partner.”',
+    name: 'Ben Okafor,',
+    role: 'Owner',
+  },
+];
+
+const TESTIMONIALS_BY_LANG: Record<Lang, Testimonial[]> = { fr: TESTIMONIALS_FR, en: TESTIMONIALS_EN };
+
+export function getTestimonials(lang: Lang): Testimonial[] {
+  return TESTIMONIALS_BY_LANG[lang];
+}

@@ -1,23 +1,21 @@
 // Pied de page du site vitrine, identique sur toutes les pages.
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { TranslocoPipe } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-footer',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, TranslocoPipe],
   template: `
     <footer class="footer">
       <div class="footer__top">
         <div>
           <nav class="footer__nav">
-            <a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }">Accueil</a>
-            <a routerLink="/services" routerLinkActive="is-active">Services</a>
-            <a routerLink="/a-propos" routerLinkActive="is-active">À propos</a>
+            <a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }">{{ 'common.nav.home' | transloco }}</a>
+            <a routerLink="/services" routerLinkActive="is-active">{{ 'common.nav.services' | transloco }}</a>
+            <a routerLink="/a-propos" routerLinkActive="is-active">{{ 'common.nav.about' | transloco }}</a>
           </nav>
-          <p class="footer__about">
-            Africa Talent Habitat &amp; Logistique — construction, rénovation, mobilité et importation
-            de matériaux, portées par des équipes qualifiées.
-          </p>
+          <p class="footer__about">{{ 'common.footerAbout' | transloco }}</p>
         </div>
 
         <div class="footer__contact">
@@ -29,10 +27,10 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 
         <div class="footer__right">
           <nav class="footer__nav">
-            <a routerLink="/projets" routerLinkActive="is-active">Projets</a>
-            <a routerLink="/carrieres" routerLinkActive="is-active">Carrières</a>
-            <a routerLink="/contact" routerLinkActive="is-active">Contact</a>
-            <a routerLink="/devis" routerLinkActive="is-active">Devis</a>
+            <a routerLink="/projets" routerLinkActive="is-active">{{ 'common.nav.projects' | transloco }}</a>
+            <a routerLink="/carrieres" routerLinkActive="is-active">{{ 'common.nav.careers' | transloco }}</a>
+            <a routerLink="/contact" routerLinkActive="is-active">{{ 'common.nav.contact' | transloco }}</a>
+            <a routerLink="/devis" routerLinkActive="is-active">{{ 'common.nav.quote' | transloco }}</a>
           </nav>
           <div class="socials">
             <a routerLink="/contact" aria-label="Facebook">f</a>

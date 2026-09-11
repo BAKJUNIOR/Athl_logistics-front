@@ -1,5 +1,6 @@
 // Page "Demander un devis" (formulaire complet, accessible directement via /devis).
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import { RevealDirective } from '../../components/reveal.directive';
 import { FileDropComponent } from '../../components/file-drop/file-drop.component';
 
@@ -7,10 +8,12 @@ const FORM_ACTION = 'https://formsubmit.co/devis@athl.com';
 
 @Component({
   selector: 'app-quote',
-  imports: [RevealDirective, FileDropComponent],
+  imports: [RevealDirective, FileDropComponent, TranslocoPipe],
   templateUrl: './quote.component.html',
 })
 export class QuoteComponent {
+  private readonly transloco = inject(TranslocoService);
+
   protected readonly formAction = FORM_ACTION;
   protected readonly status = signal('');
   protected readonly isValid = signal(false);
@@ -21,12 +24,12 @@ export class QuoteComponent {
     );
     if (missing.length) {
       event.preventDefault();
-      this.status.set('Merci de renseigner les champs obligatoires (*).');
+      this.status.set(this.transloco.translate('common.form.missingRequired'));
       this.isValid.set(false);
       missing[0].focus();
       return;
     }
-    this.status.set('Envoi en cours…');
+    this.status.set(this.transloco.translate('common.form.sending'));
     this.isValid.set(true);
   }
 }
