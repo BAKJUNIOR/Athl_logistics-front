@@ -94,6 +94,6 @@
   [text]="'common.cta.contactUs' | transloco"
   [showPhones]="true"
 >
-  <a class="btn btn--light" href="/devis" (click)="$event.preventDefault(); openQuote()">{{ 'common.requestQuote' | transloco }}</a>
+  <a class="btn btn--light" routerLink="/contact">{{ 'common.contactUs' | transloco }}</a>
   <a class="btn btn--ghost" routerLink="/projets">{{ 'common.ourWork' | transloco }}</a>
 </app-cta-banner>

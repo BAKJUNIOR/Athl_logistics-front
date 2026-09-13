@@ -12,8 +12,13 @@ import { LanguageService } from '../../../../../core/services/language.service';
   template: `
     <header class="header">
       <a class="logo" routerLink="/">
-        <img src="images/logo-athl.png" alt="ATHL — Africa Talent Habitat &amp; Logistique" />
+        @if (themeService.theme() === 'dark') {
+          <img src="images/logo/logo-full-white.png" alt="ATHL — Africa Talent Habitat &amp; Logistique" />
+        } @else {
+          <img src="images/logo/logo-full-color.png" alt="ATHL — Africa Talent Habitat &amp; Logistique" />
+        }
       </a>
+
 
       <nav class="nav">
         <a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }">{{ 'common.nav.home' | transloco }}</a>
