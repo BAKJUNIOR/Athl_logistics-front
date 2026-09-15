@@ -1,9 +1,7 @@
-// Page "Carrières" : liste des offres (recherche, filtres, accordéon, partage) + formulaire de candidature.
 import { Component, ElementRef, ViewChild, computed, inject, signal } from '@angular/core';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
-import { JobDomain, jobDomainLabel } from '../../../domain/enum/job-domain.enum';
 import { JobOffer, deadlineStatus, daysUntilDeadline } from '../../../domain/job-offer.entity';
-import { getJobOffers } from '../../../infrastructure/data/jobs.data';
+import { getJobDomains, getJobOffers } from '../../../infrastructure/data/jobs.data';
 import { RevealDirective } from '../../components/reveal.directive';
 import { FileDropComponent } from '../../components/file-drop/file-drop.component';
 import { normalizeText } from '../../../../../core/utils/text.util';
@@ -21,12 +19,12 @@ export class CareersComponent {
   private readonly languageService = inject(LanguageService);
   private readonly transloco = inject(TranslocoService);
 
-  readonly domains = Object.values(JobDomain);
   readonly jobs = computed(() => getJobOffers(this.languageService.lang()));
+  readonly domains = computed(() => getJobDomains(this.languageService.lang()));
   readonly applyFormAction = APPLY_FORM_ACTION;
 
   readonly search = signal('');
-  readonly activeTag = signal<JobDomain | ''>('');
+  readonly activeTag = signal<number | ''>('');
   readonly expanded = signal<ReadonlySet<string>>(new Set());
   readonly sharedJobId = signal('');
   readonly preselectedPoste = signal('');
@@ -35,10 +33,10 @@ export class CareersComponent {
     const query = normalizeText(this.search().trim());
     const tag = this.activeTag();
     return this.jobs().filter((job) => {
-      const matchesTag = !tag || job.domain === tag;
+      const matchesTag = !tag || job.domain.id === tag;
       const matchesQuery =
         !query ||
-        normalizeText(`${job.title} ${job.description} ${job.meta} ${job.domain}`).includes(query);
+        normalizeText(`${job.title} ${job.description} ${job.meta} ${job.domain.label}`).includes(query);
       return matchesTag && matchesQuery;
     });
   });
@@ -51,10 +49,6 @@ export class CareersComponent {
   protected readonly isValid = signal(false);
 
   @ViewChild('candidature') private candidatureSection?: ElementRef<HTMLElement>;
-
-  domainLabel(domain: JobDomain): string {
-    return jobDomainLabel(domain, this.languageService.lang());
-  }
 
   isExpanded(job: JobOffer): boolean {
     return this.expanded().has(job.id);
@@ -70,7 +64,7 @@ export class CareersComponent {
     this.expanded.set(next);
   }
 
-  selectTag(tag: JobDomain | ''): void {
+  selectTag(tag: number | ''): void {
     this.activeTag.set(tag);
   }
 

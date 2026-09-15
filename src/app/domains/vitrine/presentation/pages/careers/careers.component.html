@@ -23,8 +23,8 @@
     </div>
     <div class="chips" role="group" [attr.aria-label]="'careers.filterByDomain' | transloco">
       <button class="chip" type="button" [class.is-on]="activeTag() === ''" (click)="selectTag('')">{{ 'careers.filters.all' | transloco }}</button>
-      @for (domain of domains; track domain) {
-        <button class="chip" type="button" [class.is-on]="activeTag() === domain" (click)="selectTag(domain)">{{ domainLabel(domain) }}</button>
+      @for (domain of domains(); track domain.id) {
+        <button class="chip" type="button" [class.is-on]="activeTag() === domain.id" (click)="selectTag(domain.id)">{{ domain.label }}</button>
       }
     </div>
     <div class="jobcount" aria-live="polite">{{ jobCountKey() | transloco: { count: filteredJobs().length } }}</div>
@@ -40,7 +40,7 @@
           [attr.aria-controls]="'panel-' + job.id"
           (click)="toggle(job)"
         >
-          <span class="job__tag">{{ domainLabel(job.domain) }}</span>
+          <span class="job__tag">{{ job.domain.label }}</span>
           <span class="job__main">
             <span class="job__title">{{ job.title }}</span>
             <span class="job__desc">{{ job.description }}</span>

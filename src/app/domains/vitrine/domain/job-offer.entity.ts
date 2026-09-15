@@ -1,9 +1,11 @@
-// Entité métier "JobOffer" : une offre d'emploi affichée sur la page Carrières.
-import { JobDomain } from './enum/job-domain.enum';
+export interface JobDomainTag {
+  id: number;
+  label: string;
+}
 
 export interface JobOffer {
   id: string;
-  domain: JobDomain;
+  domain: JobDomainTag;
   title: string;
   description: string;
   meta: string;
