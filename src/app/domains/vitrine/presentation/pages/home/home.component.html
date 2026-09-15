@@ -2,7 +2,7 @@
   <h1 appReveal [innerHTML]="'home.hero.title' | transloco"></h1>
   <p [appReveal]="110">{{ 'home.hero.subtitle' | transloco }}</p>
   <div class="hero-actions" [appReveal]="220">
-    <a class="btn btn--light" href="/devis" (click)="$event.preventDefault(); openQuote()">{{ 'common.requestQuote' | transloco }}</a>
+    <a class="btn btn--light" routerLink="/a-propos">{{ 'home.hero.aboutUs' | transloco }}</a>
     <a class="btn btn--ghost" routerLink="/projets">{{ 'home.hero.seeWork' | transloco }}</a>
   </div>
 

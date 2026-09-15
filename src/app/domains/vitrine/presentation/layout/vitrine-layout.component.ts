@@ -4,10 +4,11 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { QuoteModalComponent } from './quote-modal/quote-modal.component';
+import { PromoPopupComponent } from './promo-popup/promo-popup.component';
 
 @Component({
   selector: 'app-vitrine-layout',
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, QuoteModalComponent],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, QuoteModalComponent, PromoPopupComponent],
   template: `
     <div class="page">
       <div class="glow" aria-hidden="true"></div>
@@ -21,6 +22,7 @@ import { QuoteModalComponent } from './quote-modal/quote-modal.component';
     </div>
 
     <app-quote-modal />
+    <app-promo-popup />
   `,
 })
 export class VitrineLayoutComponent {}
