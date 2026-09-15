@@ -1,5 +1,6 @@
 {
   "common": {
+    "loading": "Chargement...",
     "requestQuote": "Demander un devis",
     "learnMore": "En savoir plus",
     "contactUs": "Nous contacter",

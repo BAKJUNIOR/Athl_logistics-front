@@ -1,5 +1,6 @@
 {
   "common": {
+    "loading": "Loading...",
     "requestQuote": "Request a quote",
     "learnMore": "Learn more",
     "contactUs": "Contact us",

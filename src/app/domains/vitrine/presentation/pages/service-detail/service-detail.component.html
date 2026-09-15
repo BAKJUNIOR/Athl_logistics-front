@@ -1,4 +1,10 @@
-@let svc = service();
+@if (loading()) {
+  <section class="phero">
+    <p [appReveal]="80">{{ 'common.loading' | transloco }}</p>
+  </section>
+}
+
+@if (service(); as svc) {
 
 <section class="phero">
   <div class="phero__eyebrow" appReveal><a routerLink="/services">{{ 'common.nav.services' | transloco }}</a> · {{ 'serviceDetail.serviceLabel' | transloco }} {{ svc.number }}</div>
@@ -57,3 +63,5 @@
   <span>{{ 'serviceDetail.nextService' | transloco }}</span>
   <a [routerLink]="['/services', next().slug]">{{ next().shortTitle }} <em aria-hidden="true">&rarr;</em></a>
 </nav>
+
+}
