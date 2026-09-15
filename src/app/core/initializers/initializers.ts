@@ -5,6 +5,8 @@ import { setServiceSummaries } from '../../domains/vitrine/infrastructure/data/s
 import { JobApi, JobOfferApi } from '../../domains/vitrine/infrastructure/api/job.api';
 import { JobDomainApi, JobDomainDto } from '../../domains/vitrine/infrastructure/api/job-domain.api';
 import { setJobDomains, setJobOffers } from '../../domains/vitrine/infrastructure/data/jobs.data';
+import { TeamApi, TeamMemberApi } from '../../domains/vitrine/infrastructure/api/team.api';
+import { setTeamMembers } from '../../domains/vitrine/infrastructure/data/team.data';
 
 
 export function initializeServiceCatalog(): Promise<void> {
@@ -27,5 +29,13 @@ export function initializeJobDomainCatalog(): Promise<void> {
   const api = inject(JobDomainApi);
   return firstValueFrom(api.list().pipe(catchError(() => of([] as JobDomainDto[])))).then((list) => {
     setJobDomains(list);
+  });
+}
+
+/** Même principe, pour l'équipe dirigeante (page Équipe). */
+export function initializeTeamCatalog(): Promise<void> {
+  const api = inject(TeamApi);
+  return firstValueFrom(api.list().pipe(catchError(() => of([] as TeamMemberApi[])))).then((list) => {
+    setTeamMembers(list);
   });
 }

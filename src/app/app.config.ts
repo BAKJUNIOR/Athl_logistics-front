@@ -5,7 +5,7 @@ import { provideTransloco } from '@jsverse/transloco';
 import { routes } from './app.routes';
 import { TranslocoHttpLoader } from './core/services/transloco-loader';
 import { resolveInitialLang } from './core/services/language.service';
-import { initializeServiceCatalog, initializeJobCatalog, initializeJobDomainCatalog } from './core/initializers/initializers';
+import { initializeServiceCatalog, initializeJobCatalog, initializeJobDomainCatalog, initializeTeamCatalog } from './core/initializers/initializers';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,6 +15,7 @@ export const appConfig: ApplicationConfig = {
     provideAppInitializer(initializeServiceCatalog),
     provideAppInitializer(initializeJobCatalog),
     provideAppInitializer(initializeJobDomainCatalog),
+    provideAppInitializer(initializeTeamCatalog),
     provideTransloco({
       config: {
         availableLangs: ['fr', 'en'],
