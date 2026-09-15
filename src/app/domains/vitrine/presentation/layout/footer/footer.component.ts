@@ -1,7 +1,8 @@
 // Pied de page du site vitrine, identique sur toutes les pages.
-import { Component } from '@angular/core';
+import { Component, computed } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslocoPipe } from '@jsverse/transloco';
+import { getSiteContact } from '../../../infrastructure/data/site-contact.data';
 
 @Component({
   selector: 'app-footer',
@@ -19,9 +20,9 @@ import { TranslocoPipe } from '@jsverse/transloco';
         </div>
 
         <div class="footer__contact">
-          <div>+225 07 78 09 58 58</div>
-          <div>+225 07 09 99 33 47</div>
-          <div>+225 07 58 60 16 27</div>
+          @if (contact().phone1) { <div>{{ contact().phone1 }}</div> }
+          @if (contact().phone2) { <div>{{ contact().phone2 }}</div> }
+          @if (contact().phone3) { <div>{{ contact().phone3 }}</div> }
           <div class="footer__handle">&#64;ATHL</div>
         </div>
 
@@ -33,10 +34,26 @@ import { TranslocoPipe } from '@jsverse/transloco';
             <a routerLink="/devis" routerLinkActive="is-active">{{ 'common.nav.quote' | transloco }}</a>
           </nav>
           <div class="socials">
-            <a routerLink="/contact" aria-label="Facebook">f</a>
-            <a routerLink="/contact" aria-label="YouTube">&#9658;</a>
-            <a routerLink="/contact" aria-label="Instagram">&#9906;</a>
-            <a routerLink="/contact" aria-label="LinkedIn">in</a>
+            @if (contact().facebookUrl) {
+              <a [href]="contact().facebookUrl!" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+            } @else {
+              <a routerLink="/contact" aria-label="Facebook">f</a>
+            }
+            @if (contact().youtubeUrl) {
+              <a [href]="contact().youtubeUrl!" target="_blank" rel="noopener" aria-label="YouTube">&#9658;</a>
+            } @else {
+              <a routerLink="/contact" aria-label="YouTube">&#9658;</a>
+            }
+            @if (contact().instagramUrl) {
+              <a [href]="contact().instagramUrl!" target="_blank" rel="noopener" aria-label="Instagram">&#9906;</a>
+            } @else {
+              <a routerLink="/contact" aria-label="Instagram">&#9906;</a>
+            }
+            @if (contact().linkedinUrl) {
+              <a [href]="contact().linkedinUrl!" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+            } @else {
+              <a routerLink="/contact" aria-label="LinkedIn">in</a>
+            }
           </div>
         </div>
       </div>
@@ -45,4 +62,6 @@ import { TranslocoPipe } from '@jsverse/transloco';
     </footer>
   `,
 })
-export class FooterComponent {}
+export class FooterComponent {
+  readonly contact = computed(() => getSiteContact());
+}

@@ -30,15 +30,15 @@
     </div>
     <div class="stats">
       <div class="stat">
-        <div class="stat__num"><app-stat-counter [to]="2193" suffix="+" /></div>
+        <div class="stat__num"><app-stat-counter [to]="sitesDelivered().value" [decimals]="sitesDelivered().decimals" [suffix]="sitesDelivered().suffix" /></div>
         <div class="stat__label">{{ 'common.stats.sitesDelivered' | transloco }}</div>
       </div>
       <div class="stat">
-        <div class="stat__num"><app-stat-counter [to]="3.16" [decimals]="2" suffix=" M€" /></div>
+        <div class="stat__num"><app-stat-counter [to]="projectValue().value" [decimals]="projectValue().decimals" [suffix]="projectValue().suffix" /></div>
         <div class="stat__label">{{ 'common.stats.projectValue' | transloco }}</div>
       </div>
       <div class="stat">
-        <div class="stat__num"><app-stat-counter [to]="121.2" [decimals]="1" suffix=" M€" /></div>
+        <div class="stat__num"><app-stat-counter [to]="assetValue().value" [decimals]="assetValue().decimals" [suffix]="assetValue().suffix" /></div>
         <div class="stat__label">{{ 'common.stats.assetValue' | transloco }}</div>
       </div>
     </div>

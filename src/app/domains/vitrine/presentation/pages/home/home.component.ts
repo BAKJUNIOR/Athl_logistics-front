@@ -7,6 +7,7 @@ import { StatCounterComponent } from '../../components/stat-counter/stat-counter
 import { CtaBannerComponent } from '../../components/cta-banner/cta-banner.component';
 import { TestimonialCarouselComponent } from '../../components/testimonial-carousel/testimonial-carousel.component';
 import { getServices } from '../../../infrastructure/data/services.data';
+import { getHomeStat } from '../../../infrastructure/data/home-stats.data';
 import { LanguageService } from '../../../../../core/services/language.service';
 
 @Component({
@@ -18,4 +19,8 @@ export class HomeComponent {
   private readonly languageService = inject(LanguageService);
 
   readonly services = computed(() => getServices(this.languageService.lang()));
+
+  readonly sitesDelivered = computed(() => getHomeStat('sites_delivered'));
+  readonly projectValue = computed(() => getHomeStat('project_value'));
+  readonly assetValue = computed(() => getHomeStat('asset_value'));
 }

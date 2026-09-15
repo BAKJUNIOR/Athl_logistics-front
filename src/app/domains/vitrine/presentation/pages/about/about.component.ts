@@ -1,14 +1,19 @@
 // Page "À propos" du site vitrine ATHL.
-import { Component } from '@angular/core';
+import { Component, computed } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { RevealDirective } from '../../components/reveal.directive';
 import { StatCounterComponent } from '../../components/stat-counter/stat-counter.component';
 import { CtaBannerComponent } from '../../components/cta-banner/cta-banner.component';
+import { getHomeStat } from '../../../infrastructure/data/home-stats.data';
 
 @Component({
   selector: 'app-about',
   imports: [RouterLink, RevealDirective, StatCounterComponent, CtaBannerComponent, TranslocoPipe],
   templateUrl: './about.component.html',
 })
-export class AboutComponent {}
+export class AboutComponent {
+  readonly sitesDelivered = computed(() => getHomeStat('sites_delivered'));
+  readonly projectValue = computed(() => getHomeStat('project_value'));
+  readonly assetValue = computed(() => getHomeStat('asset_value'));
+}
