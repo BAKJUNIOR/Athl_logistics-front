@@ -26,6 +26,9 @@ import { CloudinaryUploadService } from '../../../../../core/services/cloudinary
 
         <div class="form-loading-wrap">
         <form #form class="form form--modal" [class.is-sending]="sending()" novalidate (submit)="onSubmit($event, form)">
+          @if (status(); as message) {
+            <p class="form__status" [class.is-err]="!isValid()" [class.is-ok]="isValid()" role="status">{{ message }}</p>
+          }
           <div class="field field--full">
             <label for="m-service">{{ 'quote.form.service' | transloco }} <span class="req">*</span></label>
             <select id="m-service" name="Service" required [value]="quoteModal.preselectedService()" (change)="onServiceChange($event)">
@@ -74,10 +77,6 @@ import { CloudinaryUploadService } from '../../../../../core/services/cloudinary
             <button class="btn btn--light" type="submit" [disabled]="sending()">{{ 'quote.form.submit' | transloco }}</button>
             <a class="btn btn--ghost" href="tel:+2250778095858">{{ 'common.form.callUs' | transloco }} : +225 07 78 09 58 58</a>
           </div>
-
-          @if (status(); as message) {
-            <p class="form__status" [class.is-err]="!isValid()" [class.is-ok]="isValid()" role="status">{{ message }}</p>
-          }
         </form>
         @if (sending()) {
           <div class="form-loading__overlay" role="status" aria-live="polite" aria-busy="true">

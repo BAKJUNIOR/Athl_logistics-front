@@ -138,6 +138,9 @@
     novalidate
     (submit)="onApplySubmit($event, applyForm)"
   >
+    @if (status(); as message) {
+      <p class="form__status" [class.is-err]="!isValid()" [class.is-ok]="isValid()" role="status">{{ message }}</p>
+    }
     <div class="field">
       <label for="f-nom">{{ 'common.form.fullName' | transloco }} <span class="req">*</span></label>
       <input id="f-nom" name="Nom" type="text" required autocomplete="name" [placeholder]="'common.form.fullNamePlaceholder' | transloco" />
@@ -203,10 +206,6 @@
       <button class="btn btn--light" type="submit" [disabled]="sending()">{{ 'careers.applyForm.submit' | transloco }}</button>
       <a class="btn btn--ghost" href="tel:+2250709993347">{{ 'careers.applyForm.applyByPhone' | transloco }}</a>
     </div>
-
-    @if (status(); as message) {
-      <p class="form__status" [class.is-err]="!isValid()" [class.is-ok]="isValid()" role="status">{{ message }}</p>
-    }
   </form>
   @if (sending()) {
     <div class="form-loading__overlay" role="status" aria-live="polite" aria-busy="true">
