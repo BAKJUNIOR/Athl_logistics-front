@@ -101,6 +101,13 @@ export class CareersComponent {
     }, 50);
   }
 
+  // [value] est un binding à sens unique : sans ceci, tout cycle de détection de changement
+  // déclenché ailleurs (ex: choisir le CV) réapplique preselectedPoste() et efface la sélection
+  // manuelle de l'utilisateur juste avant l'envoi.
+  onPosteChange(event: Event): void {
+    this.preselectedPoste.set((event.target as HTMLSelectElement).value);
+  }
+
   share(job: JobOffer): void {
     const url = `${location.origin}${location.pathname}#${job.id}`;
     const payload = {

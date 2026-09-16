@@ -27,7 +27,7 @@ import { CloudinaryUploadService } from '../../../../../core/services/cloudinary
         <form #form class="form form--modal" novalidate (submit)="onSubmit($event, form)">
           <div class="field field--full">
             <label for="m-service">{{ 'quote.form.service' | transloco }} <span class="req">*</span></label>
-            <select id="m-service" name="Service" required [value]="quoteModal.preselectedService()">
+            <select id="m-service" name="Service" required [value]="quoteModal.preselectedService()" (change)="onServiceChange($event)">
               <option value="">{{ 'quote.form.chooseService' | transloco }}</option>
               <option value="Réalisation de projets de construction">{{ 'common.services.construction' | transloco }}</option>
               <option value="Rénovation &amp; aménagement">{{ 'common.services.renovation' | transloco }}</option>
@@ -100,6 +100,13 @@ export class QuoteModalComponent {
 
   onFilesChange(files: FileList | null): void {
     this.files = files;
+  }
+
+  // [value] est un binding à sens unique : sans ceci, tout cycle de détection de changement
+  // déclenché ailleurs (ex: déposer un fichier) réapplique preselectedService() et efface la
+  // sélection manuelle de l'utilisateur juste avant l'envoi.
+  onServiceChange(event: Event): void {
+    this.quoteModal.preselectedService.set((event.target as HTMLSelectElement).value);
   }
 
   onSubmit(event: Event, form: HTMLFormElement): void {

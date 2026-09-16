@@ -150,7 +150,7 @@
     </div>
     <div class="field">
       <label for="f-poste">{{ 'careers.applyForm.targetRole' | transloco }} <span class="req">*</span></label>
-      <select id="f-poste" name="Poste" required [value]="preselectedPoste()">
+      <select id="f-poste" name="Poste" required [value]="preselectedPoste()" (change)="onPosteChange($event)">
         <option value="">{{ 'careers.applyForm.chooseRole' | transloco }}</option>
         @for (job of jobs(); track job.id) {
           <option [value]="job.title">{{ job.title }}</option>
