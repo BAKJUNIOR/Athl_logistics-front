@@ -74,13 +74,19 @@ const SEEN_PREFIX = 'athl_popup_seen_';
 
           @if (p.type === 'video') {
             <div class="promo-popup__media promo-popup__media--video">
-              <img [src]="p.image" [alt]="p.title" />
-              <span class="promo-popup__play" aria-hidden="true">&#9658;</span>
+              @if (playing() && p.video) {
+                <video [src]="p.video" controls autoplay playsinline></video>
+              } @else {
+                <button class="promo-popup__video-trigger" type="button" aria-label="Lire la vidéo" (click)="playVideo()">
+                  <img [src]="p.image" [alt]="p.title" />
+                  <span class="promo-popup__play" aria-hidden="true">&#9658;</span>
+                </button>
+              }
             </div>
             <div class="promo-popup__body">
               @if (p.eyebrow) { <div class="modal__eyebrow">{{ p.eyebrow }}</div> }
               <h2 id="promo-title">{{ p.title }}</h2>
-              <p class="promo-popup__hint">Aperçu — la vidéo réelle sera mise en ligne depuis le BO.</p>
+              @if (p.text) { <p>{{ p.text }}</p> }
               @if (p.ctaLabel) {
                 <div class="promo-popup__actions">
                   <button class="btn btn--light" type="button" (click)="onCta(p)">{{ p.ctaLabel }}</button>
@@ -110,12 +116,14 @@ export class PromoPopupComponent {
 
   protected readonly isOpen = signal(false);
   protected readonly subscribed = signal(false);
+  protected readonly playing = signal(false);
 
   constructor() {
     effect((onCleanup) => {
       const p = this.popup();
       this.isOpen.set(false);
       this.subscribed.set(false);
+      this.playing.set(false);
       if (!p) return;
       if (p.frequency === 'once_per_visitor' && localStorage.getItem(SEEN_PREFIX + p.id)) return;
 
@@ -133,6 +141,11 @@ export class PromoPopupComponent {
 
   close(): void {
     this.isOpen.set(false);
+    this.playing.set(false);
+  }
+
+  playVideo(): void {
+    this.playing.set(true);
   }
 
   onCta(p: { ctaUrl?: string }): void {
