@@ -5,8 +5,16 @@
 </section>
 
 <section class="team">
+  @if (showArrows()) {
+    <div class="team__head">
+      <div class="arrows">
+        <button class="arrow" type="button" [attr.aria-label]="'team.previous' | transloco" (click)="previous()">&larr;</button>
+        <button class="arrow arrow--solid" type="button" [attr.aria-label]="'team.next' | transloco" (click)="next()">&rarr;</button>
+      </div>
+    </div>
+  }
   <div class="team__grid">
-    @for (member of members(); track member.name; let i = $index) {
+    @for (member of visibleMembers(); track member.name; let i = $index) {
       <article class="member" [appReveal]="60 + i * 90">
         <div class="member__media"><img [src]="member.photo" [alt]="member.name" loading="lazy" /></div>
         <div class="member__body">

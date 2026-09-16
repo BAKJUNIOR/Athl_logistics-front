@@ -127,6 +127,8 @@
     "subtitle": "Une direction proche du terrain, joignable et engagée sur chacun de nos chantiers comme sur nos opérations logistiques.",
     "groundTeamsImageAlt": "Responsables sur le chantier",
     "joinTeams": "Rejoindre nos équipes",
+    "previous": "Membre précédent",
+    "next": "Membre suivant",
     "groundTeams": {
       "title": "Nos équipes terrain",
       "lead": "Ouvriers qualifiés, chefs de chantier, chauffeurs et logisticiens : chaque métier est encadré, formé et suivi. C'est cette organisation qui nous permet de tenir les délais sans transiger sur la sécurité."

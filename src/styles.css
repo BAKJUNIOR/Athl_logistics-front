@@ -356,6 +356,7 @@ h2 { margin: 0; font-size: clamp(28px, 2.8vw, 40px); line-height: 1.18; font-wei
 
 /* ---------- Équipe ---------- */
 .team { padding: 56px 0 100px; }
+.team__head { display: flex; justify-content: flex-end; margin-bottom: 24px; }
 .team__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; }
 .member { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; transition: transform .5s cubic-bezier(.22,.68,.24,1), border-color .4s ease; }
 .member:hover { transform: translateY(-8px); border-color: var(--border-hover-accent); }
