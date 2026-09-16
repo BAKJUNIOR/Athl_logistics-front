@@ -16,7 +16,7 @@ const SEEN_PREFIX = 'athl_popup_seen_';
   selector: 'app-promo-popup',
   template: `
     @if (popup(); as p) {
-      <div class="modal promo-popup" [class.promo-popup--split]="p.layout === 'image_left'" [class.is-open]="isOpen()" [hidden]="!isOpen()">
+      <div class="modal promo-popup" [class.promo-popup--split]="p.layout === 'image_left'" [class.promo-popup--video]="p.type === 'video'" [class.is-open]="isOpen()" [hidden]="!isOpen()">
         <div class="modal__backdrop" (click)="close()"></div>
         <div class="modal__card promo-popup__card" role="dialog" aria-modal="true" aria-labelledby="promo-title">
           <button class="modal__close" type="button" aria-label="Fermer" (click)="close()">&#215;</button>
