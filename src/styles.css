@@ -641,7 +641,7 @@ html:not([data-theme='light']) .modal__card {
 .form-loading-wrap { position: relative; }
 .form.is-sending { filter: blur(3px); opacity: .55; pointer-events: none; user-select: none; transition: filter .25s ease, opacity .25s ease; }
 .form-loading__overlay { position: absolute; inset: 0; z-index: 2; display: flex; align-items: center; justify-content: center; }
-.spinner { width: 34px; height: 34px; border-radius: 50%; border: 3px solid var(--line-strong); border-top-color: var(--accent); animation: form-spin .8s linear infinite; }
+.spinner { width: 72px; height: 72px; border-radius: 50%; border: 6px solid var(--line-strong); border-top-color: var(--accent); animation: form-spin .8s linear infinite; }
 @keyframes form-spin { to { transform: rotate(360deg); } }
 
 /* ---------- Valeurs ---------- */
