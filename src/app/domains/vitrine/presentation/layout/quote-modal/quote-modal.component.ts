@@ -1,7 +1,7 @@
 // Modal "Demander un devis", ouvrable depuis n'importe quelle page via QuoteModalService.
 // Soumet directement à l'API backend (POST /api/v1/quotes) : les pièces jointes sont uploadées
 // vers Cloudinary côté client au préalable, seules leurs URLs sont envoyées au backend.
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, ViewChild, effect, inject, signal } from '@angular/core';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import { forkJoin, of } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
@@ -53,6 +53,7 @@ import { CloudinaryUploadService } from '../../../../../core/services/cloudinary
           <div class="field field--full">
             <label for="m-files">{{ 'quote.form.files' | transloco }} <span class="opt">({{ 'common.form.optional' | transloco }})</span></label>
             <app-file-drop
+              #filesDrop
               name="Documents"
               [multiple]="true"
               [compact]="true"
@@ -91,6 +92,8 @@ export class QuoteModalComponent {
   protected readonly isValid = signal(false);
   protected readonly sending = signal(false);
   private files: FileList | null = null;
+
+  @ViewChild('filesDrop') private filesDrop?: FileDropComponent;
 
   constructor() {
     effect(() => {
@@ -147,6 +150,7 @@ export class QuoteModalComponent {
           this.status.set(this.transloco.translate('common.form.sent'));
           form.reset();
           this.files = null;
+          this.filesDrop?.reset();
         },
         error: () => {
           this.sending.set(false);

@@ -54,6 +54,7 @@ export class CareersComponent {
   private cvFile: File | null = null;
 
   @ViewChild('candidature') private candidatureSection?: ElementRef<HTMLElement>;
+  @ViewChild('cvDrop') private cvDrop?: FileDropComponent;
 
   isExpanded(job: JobOffer): boolean {
     return this.expanded().has(job.id);
@@ -184,6 +185,7 @@ export class CareersComponent {
           this.status.set(this.transloco.translate('common.form.sent'));
           form.reset();
           this.cvFile = null;
+          this.cvDrop?.reset();
         },
         error: () => {
           this.sending.set(false);

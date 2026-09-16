@@ -1,5 +1,5 @@
 // Zone de dépôt de fichiers (drag & drop + validation de taille) réutilisée par les formulaires Devis et Candidature.
-import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild, signal } from '@angular/core';
 
 let nextId = 0;
 
@@ -18,6 +18,7 @@ let nextId = 0;
       (drop)="onDrop($event)"
     >
       <input
+        #fileInput
         [id]="inputId"
         type="file"
         [name]="name"
@@ -55,6 +56,18 @@ export class FileDropComponent {
   readonly inputId = `file-drop-${nextId++}`;
   readonly isOver = signal(false);
   readonly fileSummary = signal('');
+
+  @ViewChild('fileInput') private fileInputRef?: ElementRef<HTMLInputElement>;
+
+  // form.reset() vide l'input natif mais ne déclenche pas de (change) : sans ceci, le résumé
+  // affiché ("1 fichier · X Ko") resterait visible après un envoi réussi.
+  reset(): void {
+    this.isOver.set(false);
+    this.fileSummary.set('');
+    if (this.fileInputRef) {
+      this.fileInputRef.nativeElement.value = '';
+    }
+  }
 
   onDragOver(event: DragEvent): void {
     event.preventDefault();

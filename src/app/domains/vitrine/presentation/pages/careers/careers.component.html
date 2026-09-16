@@ -181,6 +181,7 @@
     <div class="field field--full">
       <label for="f-cv">{{ 'careers.applyForm.cv' | transloco }} <span class="req">*</span></label>
       <app-file-drop
+        #cvDrop
         name="CV"
         [required]="true"
         accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"

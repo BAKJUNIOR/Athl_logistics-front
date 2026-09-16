@@ -1,7 +1,7 @@
 // Page "Demander un devis" (formulaire complet, accessible directement via /devis).
 // Soumet directement à l'API backend (POST /api/v1/quotes) : les pièces jointes sont uploadées
 // vers Cloudinary côté client au préalable, seules leurs URLs sont envoyées au backend.
-import { Component, inject, signal } from '@angular/core';
+import { Component, ViewChild, inject, signal } from '@angular/core';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import { forkJoin, of } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
@@ -24,6 +24,8 @@ export class QuoteComponent {
   protected readonly isValid = signal(false);
   protected readonly sending = signal(false);
   private files: FileList | null = null;
+
+  @ViewChild('filesDrop') private filesDrop?: FileDropComponent;
 
   onFilesChange(files: FileList | null): void {
     this.files = files;
@@ -67,6 +69,7 @@ export class QuoteComponent {
           this.status.set(this.transloco.translate('common.form.sent'));
           form.reset();
           this.files = null;
+          this.filesDrop?.reset();
         },
         error: () => {
           this.sending.set(false);
