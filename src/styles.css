@@ -33,6 +33,7 @@
   --accent: #f97316;
   --accent-light: #fdba74;
   --danger: #fca5a5;
+  --success: #86efac;
   --ink: #0a0b0d;
   --inverted-bg: #ffffff;
   --inverted-text: #0a0b0d;
@@ -69,6 +70,7 @@ html[data-theme='light'] {
   --accent: #f97316;
   --accent-light: #c2410c;
   --danger: #b91c1c;
+  --success: #15803d;
   --ink: #0a0b0d;
   --inverted-bg: #16181c;
   --inverted-text: #ffffff;
@@ -627,7 +629,7 @@ html:not([data-theme='light']) .modal__card {
 .form__foot { flex-direction: row; flex-wrap: wrap; gap: 12px; margin-top: 4px; }
 .form__status { grid-column: 1 / -1; margin: 0; font-size: 12.5px; }
 .form__status.is-err { color: var(--danger); }
-.form__status.is-ok { color: var(--accent-light); }
+.form__status.is-ok { color: var(--success); }
 
 /* ---------- Valeurs ---------- */
 .values { padding: 20px 0 100px; }
