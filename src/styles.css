@@ -632,7 +632,7 @@ html:not([data-theme='light']) .modal__card {
 .check input { appearance: auto; width: 16px; height: 16px; margin-top: 2px; flex: 0 0 auto; accent-color: var(--accent); cursor: pointer; }
 .check label { font-size: 11.5px; line-height: 1.6; color: var(--muted); font-weight: 300; cursor: pointer; }
 .form__foot { flex-direction: row; flex-wrap: wrap; gap: 12px; margin-top: 4px; }
-.form__status { grid-column: 1 / -1; margin: 0 0 8px; padding: 14px 16px; border-radius: 10px; font-size: 14px; font-weight: 700; }
+.form__status { grid-column: 1 / -1; margin: 0 0 8px; padding: 14px 16px; border-radius: 10px; font-size: 14px; }
 .form__status.is-err { color: var(--danger); background: color-mix(in srgb, var(--danger) 14%, transparent); border: 1px solid color-mix(in srgb, var(--danger) 35%, transparent); }
 .form__status.is-ok { color: var(--success); background: color-mix(in srgb, var(--success) 14%, transparent); border: 1px solid color-mix(in srgb, var(--success) 35%, transparent); }
 
