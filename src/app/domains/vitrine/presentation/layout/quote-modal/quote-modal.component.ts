@@ -1,10 +1,14 @@
 // Modal "Demander un devis", ouvrable depuis n'importe quelle page via QuoteModalService.
+// Soumet directement à l'API backend (POST /api/v1/quotes) : les pièces jointes sont uploadées
+// vers Cloudinary côté client au préalable, seules leurs URLs sont envoyées au backend.
 import { Component, effect, inject, signal } from '@angular/core';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
+import { forkJoin, of } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
 import { FileDropComponent } from '../../components/file-drop/file-drop.component';
 import { QuoteModalService } from '../../services/quote-modal.service';
-
-const FORM_ACTION = 'https://formsubmit.co/devis@athl.com';
+import { QuoteApi } from '../../../infrastructure/api/quote.api';
+import { CloudinaryUploadService } from '../../../../../core/services/cloudinary-upload.service';
 
 @Component({
   selector: 'app-quote-modal',
@@ -20,19 +24,7 @@ const FORM_ACTION = 'https://formsubmit.co/devis@athl.com';
           <p>{{ 'quote.subtitle' | transloco }}</p>
         </div>
 
-        <form
-          #form
-          class="form form--modal"
-          [action]="formAction"
-          method="POST"
-          enctype="multipart/form-data"
-          novalidate
-          (submit)="onSubmit($event, form)"
-        >
-          <input type="hidden" name="_subject" value="Demande de devis ATHL" />
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_template" value="table" />
-
+        <form #form class="form form--modal" novalidate (submit)="onSubmit($event, form)">
           <div class="field field--full">
             <label for="m-service">{{ 'quote.form.service' | transloco }} <span class="req">*</span></label>
             <select id="m-service" name="Service" required [value]="quoteModal.preselectedService()">
@@ -67,6 +59,7 @@ const FORM_ACTION = 'https://formsubmit.co/devis@athl.com';
               [label]="'quote.form.dropLabel' | transloco"
               [browseLabel]="'quote.form.dropBrowseShort' | transloco"
               [hint]="'quote.form.dropHint' | transloco"
+              (filesChange)="onFilesChange($event)"
             />
           </div>
 
@@ -76,7 +69,7 @@ const FORM_ACTION = 'https://formsubmit.co/devis@athl.com';
           </div>
 
           <div class="field field--full form__foot">
-            <button class="btn btn--light" type="submit">{{ 'quote.form.submit' | transloco }}</button>
+            <button class="btn btn--light" type="submit" [disabled]="sending()">{{ 'quote.form.submit' | transloco }}</button>
             <a class="btn btn--ghost" href="tel:+2250778095858">{{ 'common.form.callUs' | transloco }} : +225 07 78 09 58 58</a>
           </div>
 
@@ -90,11 +83,14 @@ const FORM_ACTION = 'https://formsubmit.co/devis@athl.com';
 })
 export class QuoteModalComponent {
   protected readonly quoteModal = inject(QuoteModalService);
-  protected readonly formAction = FORM_ACTION;
+  private readonly quoteApi = inject(QuoteApi);
+  private readonly cloudinary = inject(CloudinaryUploadService);
   private readonly transloco = inject(TranslocoService);
 
   protected readonly status = signal('');
   protected readonly isValid = signal(false);
+  protected readonly sending = signal(false);
+  private files: FileList | null = null;
 
   constructor() {
     effect(() => {
@@ -102,18 +98,54 @@ export class QuoteModalComponent {
     });
   }
 
+  onFilesChange(files: FileList | null): void {
+    this.files = files;
+  }
+
   onSubmit(event: Event, form: HTMLFormElement): void {
+    event.preventDefault();
     const missing = Array.from(form.querySelectorAll<HTMLInputElement>('[required]')).filter((el) =>
       el.type === 'checkbox' ? !el.checked : !el.value,
     );
     if (missing.length) {
-      event.preventDefault();
       this.status.set(this.transloco.translate('common.form.missingRequired'));
       this.isValid.set(false);
       missing[0].focus();
       return;
     }
+
+    const serviceLabel = (form.querySelector('#m-service') as HTMLSelectElement).value;
+    const name = (form.querySelector('#m-nom') as HTMLInputElement).value;
+    const phone = (form.querySelector('#m-tel') as HTMLInputElement).value;
+    const description = (form.querySelector('#m-desc') as HTMLTextAreaElement).value;
+
+    this.sending.set(true);
     this.status.set(this.transloco.translate('common.form.sending'));
-    this.isValid.set(true);
+
+    const uploads$ = this.files?.length
+      ? forkJoin(Array.from(this.files).map((f) => this.cloudinary.upload(f, 'quotes').pipe(catchError(() => of(null)))))
+      : of([] as ({ secure_url: string } | null)[]);
+
+    uploads$
+      .pipe(
+        switchMap((results) => {
+          const attachments = results.filter((r): r is { secure_url: string } => !!r).map((r) => r.secure_url);
+          return this.quoteApi.create({ serviceLabel, name, phone, description, attachments });
+        }),
+      )
+      .subscribe({
+        next: () => {
+          this.sending.set(false);
+          this.isValid.set(true);
+          this.status.set(this.transloco.translate('common.form.sent'));
+          form.reset();
+          this.files = null;
+        },
+        error: () => {
+          this.sending.set(false);
+          this.isValid.set(false);
+          this.status.set(this.transloco.translate('common.form.sendError'));
+        },
+      });
   }
 }

@@ -1,5 +1,7 @@
 import { Component, ElementRef, ViewChild, computed, inject, signal } from '@angular/core';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
+import { of } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
 import { JobOffer, deadlineStatus, daysUntilDeadline } from '../../../domain/job-offer.entity';
 import { getJobDomains, getJobOffers } from '../../../infrastructure/data/jobs.data';
 import { RevealDirective } from '../../components/reveal.directive';
@@ -7,8 +9,8 @@ import { FileDropComponent } from '../../components/file-drop/file-drop.componen
 import { normalizeText } from '../../../../../core/utils/text.util';
 import { formatLocalizedDate } from '../../../../../core/utils/date.util';
 import { LanguageService } from '../../../../../core/services/language.service';
-
-const APPLY_FORM_ACTION = 'https://formsubmit.co/recrutement@athl.com';
+import { ApplicationApi } from '../../../infrastructure/api/application.api';
+import { CloudinaryUploadService } from '../../../../../core/services/cloudinary-upload.service';
 
 @Component({
   selector: 'app-careers',
@@ -18,10 +20,11 @@ const APPLY_FORM_ACTION = 'https://formsubmit.co/recrutement@athl.com';
 export class CareersComponent {
   private readonly languageService = inject(LanguageService);
   private readonly transloco = inject(TranslocoService);
+  private readonly applicationApi = inject(ApplicationApi);
+  private readonly cloudinary = inject(CloudinaryUploadService);
 
   readonly jobs = computed(() => getJobOffers(this.languageService.lang()));
   readonly domains = computed(() => getJobDomains(this.languageService.lang()));
-  readonly applyFormAction = APPLY_FORM_ACTION;
 
   readonly search = signal('');
   readonly activeTag = signal<number | ''>('');
@@ -47,6 +50,8 @@ export class CareersComponent {
 
   protected readonly status = signal('');
   protected readonly isValid = signal(false);
+  protected readonly sending = signal(false);
+  private cvFile: File | null = null;
 
   @ViewChild('candidature') private candidatureSection?: ElementRef<HTMLElement>;
 
@@ -121,18 +126,63 @@ export class CareersComponent {
     setTimeout(() => this.sharedJobId.set(''), 2200);
   }
 
+  onCvChange(files: FileList | null): void {
+    this.cvFile = files?.length ? files[0] : null;
+  }
+
   onApplySubmit(event: Event, form: HTMLFormElement): void {
+    event.preventDefault();
     const missing = Array.from(form.querySelectorAll<HTMLInputElement>('[required]')).filter((el) =>
       el.type === 'checkbox' ? !el.checked : !el.value,
     );
-    if (missing.length) {
-      event.preventDefault();
+    if (missing.length || !this.cvFile) {
       this.status.set(this.transloco.translate('common.form.missingRequired'));
       this.isValid.set(false);
-      missing[0].focus();
+      missing[0]?.focus();
       return;
     }
+
+    const name = (form.querySelector('#f-nom') as HTMLInputElement).value;
+    const phone = (form.querySelector('#f-tel') as HTMLInputElement).value;
+    const email = (form.querySelector('#f-mail') as HTMLInputElement).value;
+    const position = (form.querySelector('#f-poste') as HTMLSelectElement).value;
+    const experience = (form.querySelector('#f-exp') as HTMLSelectElement).value;
+    const city = (form.querySelector('#f-ville') as HTMLInputElement).value;
+    const message = (form.querySelector('#f-msg') as HTMLTextAreaElement).value;
+
+    this.sending.set(true);
     this.status.set(this.transloco.translate('common.form.sending'));
-    this.isValid.set(true);
+
+    this.cloudinary
+      .upload(this.cvFile, 'applications')
+      .pipe(
+        catchError(() => of(null)),
+        switchMap((result) =>
+          this.applicationApi.create({
+            position,
+            name,
+            phone,
+            email,
+            experience,
+            city,
+            message,
+            cvUrl: result?.secure_url,
+          }),
+        ),
+      )
+      .subscribe({
+        next: () => {
+          this.sending.set(false);
+          this.isValid.set(true);
+          this.status.set(this.transloco.translate('common.form.sent'));
+          form.reset();
+          this.cvFile = null;
+        },
+        error: () => {
+          this.sending.set(false);
+          this.isValid.set(false);
+          this.status.set(this.transloco.translate('common.form.sendError'));
+        },
+      });
   }
 }

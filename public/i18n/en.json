@@ -53,6 +53,8 @@
       "optional": "optional",
       "missingRequired": "Please fill in the required fields (*).",
       "sending": "Sending…",
+      "sent": "Your request has been sent. We'll get back to you shortly.",
+      "sendError": "Something went wrong, please try again.",
       "callUs": "Call"
     }
   },

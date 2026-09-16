@@ -133,16 +133,9 @@
     #applyForm
     class="form"
     [appReveal]="120"
-    [action]="applyFormAction"
-    method="POST"
-    enctype="multipart/form-data"
     novalidate
     (submit)="onApplySubmit($event, applyForm)"
   >
-    <input type="hidden" name="_subject" value="Candidature ATHL" />
-    <input type="hidden" name="_captcha" value="false" />
-    <input type="hidden" name="_template" value="table" />
-
     <div class="field">
       <label for="f-nom">{{ 'common.form.fullName' | transloco }} <span class="req">*</span></label>
       <input id="f-nom" name="Nom" type="text" required autocomplete="name" [placeholder]="'common.form.fullNamePlaceholder' | transloco" />
@@ -194,6 +187,7 @@
         [label]="'careers.applyForm.dropLabel' | transloco"
         [browseLabel]="'careers.applyForm.dropBrowse' | transloco"
         [hint]="'careers.applyForm.dropHint' | transloco"
+        (filesChange)="onCvChange($event)"
       />
     </div>
 
@@ -203,7 +197,7 @@
     </div>
 
     <div class="field field--full form__foot">
-      <button class="btn btn--light" type="submit">{{ 'careers.applyForm.submit' | transloco }}</button>
+      <button class="btn btn--light" type="submit" [disabled]="sending()">{{ 'careers.applyForm.submit' | transloco }}</button>
       <a class="btn btn--ghost" href="tel:+2250709993347">{{ 'careers.applyForm.applyByPhone' | transloco }}</a>
     </div>
 
