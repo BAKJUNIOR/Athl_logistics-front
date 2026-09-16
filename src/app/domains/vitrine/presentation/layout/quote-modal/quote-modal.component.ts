@@ -64,7 +64,7 @@ import { CloudinaryUploadService } from '../../../../../core/services/cloudinary
           </div>
 
           <div class="field field--full check">
-            <input id="m-ok" name="Consentement" type="checkbox" value="Oui" required />
+            <input id="m-ok" name="Consentement" type="checkbox" value="Oui" required checked />
             <label for="m-ok">{{ 'quote.form.consent' | transloco }} <span class="req">*</span></label>
           </div>
 
