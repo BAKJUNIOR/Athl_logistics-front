@@ -139,7 +139,10 @@
     (submit)="onApplySubmit($event, applyForm)"
   >
     @if (status(); as message) {
-      <p class="form__status" [class.is-err]="!isValid()" [class.is-ok]="isValid()" role="status">{{ message }}</p>
+      <p class="form__status" [class.is-err]="!isValid()" [class.is-ok]="isValid()" role="status">
+        <span>{{ message }}</span>
+        <button type="button" class="form__status-close" aria-label="Fermer" (click)="status.set('')">&times;</button>
+      </p>
     }
     <div class="field">
       <label for="f-nom">{{ 'common.form.fullName' | transloco }} <span class="req">*</span></label>

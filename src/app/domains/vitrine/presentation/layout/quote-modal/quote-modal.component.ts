@@ -27,7 +27,10 @@ import { CloudinaryUploadService } from '../../../../../core/services/cloudinary
         <div class="form-loading-wrap">
         <form #form class="form form--modal" [class.is-sending]="sending()" novalidate (submit)="onSubmit($event, form)">
           @if (status(); as message) {
-            <p class="form__status" [class.is-err]="!isValid()" [class.is-ok]="isValid()" role="status">{{ message }}</p>
+            <p class="form__status" [class.is-err]="!isValid()" [class.is-ok]="isValid()" role="status">
+              <span>{{ message }}</span>
+              <button type="button" class="form__status-close" aria-label="Fermer" (click)="status.set('')">&times;</button>
+            </p>
           }
           <div class="field field--full">
             <label for="m-service">{{ 'quote.form.service' | transloco }} <span class="req">*</span></label>
