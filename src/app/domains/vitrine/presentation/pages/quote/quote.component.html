@@ -5,9 +5,11 @@
 </section>
 
 <section class="devis">
+  <div class="form-loading-wrap">
   <form
     #form
     class="form form--quote"
+    [class.is-sending]="sending()"
     [appReveal]="80"
     novalidate
     (submit)="onSubmit($event, form)"
@@ -64,4 +66,10 @@
       <p class="form__status" [class.is-err]="!isValid()" [class.is-ok]="isValid()" role="status">{{ message }}</p>
     }
   </form>
+  @if (sending()) {
+    <div class="form-loading__overlay" role="status" aria-live="polite" aria-busy="true">
+      <span class="spinner" aria-hidden="true"></span>
+    </div>
+  }
+  </div>
 </section>

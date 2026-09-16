@@ -49,7 +49,7 @@ export class QuoteComponent {
     const description = (form.querySelector('#q-desc') as HTMLTextAreaElement).value;
 
     this.sending.set(true);
-    this.status.set(this.transloco.translate('common.form.sending'));
+    this.status.set('');
 
     const uploads$ = this.files?.length
       ? forkJoin(Array.from(this.files).map((f) => this.cloudinary.upload(f, 'quotes').pipe(catchError(() => of(null)))))

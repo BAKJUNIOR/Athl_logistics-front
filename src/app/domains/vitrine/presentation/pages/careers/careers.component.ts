@@ -159,7 +159,7 @@ export class CareersComponent {
     const message = (form.querySelector('#f-msg') as HTMLTextAreaElement).value;
 
     this.sending.set(true);
-    this.status.set(this.transloco.translate('common.form.sending'));
+    this.status.set('');
 
     this.cloudinary
       .upload(this.cvFile, 'applications')

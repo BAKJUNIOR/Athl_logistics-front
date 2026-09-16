@@ -24,7 +24,8 @@ import { CloudinaryUploadService } from '../../../../../core/services/cloudinary
           <p>{{ 'quote.subtitle' | transloco }}</p>
         </div>
 
-        <form #form class="form form--modal" novalidate (submit)="onSubmit($event, form)">
+        <div class="form-loading-wrap">
+        <form #form class="form form--modal" [class.is-sending]="sending()" novalidate (submit)="onSubmit($event, form)">
           <div class="field field--full">
             <label for="m-service">{{ 'quote.form.service' | transloco }} <span class="req">*</span></label>
             <select id="m-service" name="Service" required [value]="quoteModal.preselectedService()" (change)="onServiceChange($event)">
@@ -78,6 +79,12 @@ import { CloudinaryUploadService } from '../../../../../core/services/cloudinary
             <p class="form__status" [class.is-err]="!isValid()" [class.is-ok]="isValid()" role="status">{{ message }}</p>
           }
         </form>
+        @if (sending()) {
+          <div class="form-loading__overlay" role="status" aria-live="polite" aria-busy="true">
+            <span class="spinner" aria-hidden="true"></span>
+          </div>
+        }
+        </div>
       </div>
     </div>
   `,
@@ -130,7 +137,7 @@ export class QuoteModalComponent {
     const description = (form.querySelector('#m-desc') as HTMLTextAreaElement).value;
 
     this.sending.set(true);
-    this.status.set(this.transloco.translate('common.form.sending'));
+    this.status.set('');
 
     const uploads$ = this.files?.length
       ? forkJoin(Array.from(this.files).map((f) => this.cloudinary.upload(f, 'quotes').pipe(catchError(() => of(null)))))

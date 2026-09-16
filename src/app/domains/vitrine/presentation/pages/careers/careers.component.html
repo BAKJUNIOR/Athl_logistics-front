@@ -129,9 +129,11 @@
     <p class="lead">{{ 'careers.applyForm.lead' | transloco }}</p>
   </div>
 
+  <div class="form-loading-wrap">
   <form
     #applyForm
     class="form"
+    [class.is-sending]="sending()"
     [appReveal]="120"
     novalidate
     (submit)="onApplySubmit($event, applyForm)"
@@ -206,4 +208,10 @@
       <p class="form__status" [class.is-err]="!isValid()" [class.is-ok]="isValid()" role="status">{{ message }}</p>
     }
   </form>
+  @if (sending()) {
+    <div class="form-loading__overlay" role="status" aria-live="polite" aria-busy="true">
+      <span class="spinner" aria-hidden="true"></span>
+    </div>
+  }
+  </div>
 </section>
