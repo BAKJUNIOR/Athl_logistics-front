@@ -9,8 +9,8 @@ import { Lang } from '../../../../core/services/language.service';
 const STATIC_PAGES: Record<Lang, SearchResult[]> = {
   fr: [
     { title: 'Accueil', excerpt: "L'expertise qui bâtit, la logistique qui accélère.", url: '/', category: 'Page' },
-    { title: 'À propos', excerpt: 'Africa Talent Habitat & Logistique : qui nous sommes, nos valeurs.', url: '/a-propos', category: 'Page' },
-    { title: 'Nos équipes', excerpt: 'La direction et les équipes terrain ATHL.', url: '/equipe', category: 'Page' },
+    { title: 'À propos', excerpt: 'Africa Talent Habitat & Logistique : qui nous sommes, nos valeurs, nos équipes.', url: '/a-propos', category: 'Page' },
+    { title: 'Actualités', excerpt: 'Chantiers livrés, partenariats et recrutements ATHL.', url: '/actualites', category: 'Page' },
     { title: 'Projets', excerpt: 'Nos chantiers et réalisations à Abidjan et en Côte d’Ivoire.', url: '/projets', category: 'Page' },
     { title: 'Services', excerpt: 'Construction, rénovation, mobilité et importation de matériaux.', url: '/services', category: 'Page' },
     { title: 'Carrières', excerpt: 'Rejoindre les équipes ATHL : offres et candidature spontanée.', url: '/carrieres', category: 'Page' },
@@ -19,8 +19,8 @@ const STATIC_PAGES: Record<Lang, SearchResult[]> = {
   ],
   en: [
     { title: 'Home', excerpt: 'The expertise that builds, the logistics that accelerate.', url: '/', category: 'Page' },
-    { title: 'About', excerpt: 'Africa Talent Habitat & Logistics: who we are, our values.', url: '/a-propos', category: 'Page' },
-    { title: 'Our teams', excerpt: 'ATHL leadership and field teams.', url: '/equipe', category: 'Page' },
+    { title: 'About', excerpt: 'Africa Talent Habitat & Logistics: who we are, our values, our teams.', url: '/a-propos', category: 'Page' },
+    { title: 'News', excerpt: 'Completed sites, partnerships and hiring campaigns at ATHL.', url: '/actualites', category: 'Page' },
     { title: 'Projects', excerpt: 'Our sites and completed projects in Abidjan and Côte d’Ivoire.', url: '/projets', category: 'Page' },
     { title: 'Services', excerpt: 'Construction, renovation, mobility and import of materials.', url: '/services', category: 'Page' },
     { title: 'Careers', excerpt: 'Join the ATHL teams: openings and spontaneous applications.', url: '/carrieres', category: 'Page' },
@@ -47,7 +47,7 @@ export function getSearchIndex(lang: Lang): SearchResult[] {
   const teamResults: SearchResult[] = getTeamMembers(lang).map((member) => ({
     title: member.name,
     excerpt: member.role,
-    url: '/equipe',
+    url: '/a-propos',
     category: labels.team,
   }));
 

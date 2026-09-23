@@ -8,10 +8,10 @@ const FALLBACK: SiteContactApiDto = {
   phone2: '+225 07 09 99 33 47',
   phone3: '+225 07 58 60 16 27',
   address: "Abidjan, Côte d'Ivoire",
-  facebookUrl: null,
-  youtubeUrl: null,
+  facebookUrl: 'https://www.facebook.com/people/Africa-Gold-Talent-Consulting/100088839685373/',
+  youtubeUrl: 'https://www.youtube.com/@ATHL-LOGISTIQUE',
   instagramUrl: null,
-  linkedinUrl: null,
+  linkedinUrl: 'https://www.linkedin.com/company/africa-talent-habitat-logistique-athl/',
 };
 
 const SITE_CONTACT = signal<SiteContactApiDto>(FALLBACK);

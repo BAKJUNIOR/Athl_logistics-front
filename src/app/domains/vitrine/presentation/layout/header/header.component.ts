@@ -23,9 +23,9 @@ import { LanguageService } from '../../../../../core/services/language.service';
 
       <nav class="nav">
         <a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }">{{ 'common.nav.home' | transloco }}</a>
-        <a routerLink="/equipe" routerLinkActive="is-active">{{ 'common.nav.team' | transloco }}</a>
         <a routerLink="/projets" routerLinkActive="is-active">{{ 'common.nav.projects' | transloco }}</a>
         <a routerLink="/services" routerLinkActive="is-active">{{ 'common.nav.services' | transloco }}</a>
+        <a routerLink="/actualites" routerLinkActive="is-active">{{ 'common.nav.news' | transloco }}</a>
         <a routerLink="/carrieres" routerLinkActive="is-active">{{ 'common.nav.careers' | transloco }}</a>
         <a routerLink="/a-propos" routerLinkActive="is-active">{{ 'common.nav.about' | transloco }}</a>
       </nav>
@@ -75,9 +75,9 @@ import { LanguageService } from '../../../../../core/services/language.service';
 
     <nav class="mobile-menu" id="mobile-menu" [hidden]="!menuOpen()">
       <a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }" (click)="menuOpen.set(false)">{{ 'common.nav.home' | transloco }}</a>
-      <a routerLink="/equipe" routerLinkActive="is-active" (click)="menuOpen.set(false)">{{ 'common.nav.team' | transloco }}</a>
       <a routerLink="/projets" routerLinkActive="is-active" (click)="menuOpen.set(false)">{{ 'common.nav.projects' | transloco }}</a>
       <a routerLink="/services" routerLinkActive="is-active" (click)="menuOpen.set(false)">{{ 'common.nav.services' | transloco }}</a>
+      <a routerLink="/actualites" routerLinkActive="is-active" (click)="menuOpen.set(false)">{{ 'common.nav.news' | transloco }}</a>
       <a routerLink="/carrieres" routerLinkActive="is-active" (click)="menuOpen.set(false)">{{ 'common.nav.careers' | transloco }}</a>
       <a routerLink="/a-propos" routerLinkActive="is-active" (click)="menuOpen.set(false)">{{ 'common.nav.about' | transloco }}</a>
       <a routerLink="/contact" (click)="menuOpen.set(false)">{{ 'common.nav.contact' | transloco }}</a>

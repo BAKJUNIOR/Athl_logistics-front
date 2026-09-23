@@ -1,4 +1,4 @@
-// Source de données des 3 compteurs animés (accueil, À propos, Équipe), branchée sur l'API
+// Source de données des 3 compteurs animés (accueil, À propos), branchée sur l'API
 // backend. Chargée une fois au démarrage (voir core/initializers) et mise en cache dans un
 // signal : getHomeStat() reste synchrone pour ne pas changer les pages qui le consomment déjà.
 import { signal } from '@angular/core';

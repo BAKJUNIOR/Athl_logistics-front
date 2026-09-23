@@ -26,11 +26,12 @@
         "2": "Maroc",
         "3": "Europe"
       },
-      "copyright": "© {{year}} ATHL — Tous droits réservés"
+      "copyright": "© {{year}} ATHL — Tous droits réservés",
+      "followUs": "Suivez-nous"
     },
     "nav": {
       "home": "Accueil",
-      "team": "Nos équipes",
+      "news": "Actualités",
       "projects": "Projets",
       "services": "Services",
       "careers": "Carrières",
@@ -201,7 +202,31 @@
     "next": "Membre suivant",
     "groundTeams": {
       "title": "Nos équipes terrain",
-      "lead": "Ouvriers qualifiés, chefs de chantier, chauffeurs et logisticiens : chaque métier est encadré, formé et suivi. C'est cette organisation qui nous permet de tenir les délais sans transiger sur la sécurité."
+      "lead": "Ouvriers qualifiés, chefs de chantier, chauffeurs et logisticiens : chaque métier est encadré, formé et suivi. C'est cette organisation qui nous permet de tenir les délais sans transiger sur la sécurité.",
+      "roles": {
+        "workers": "Ouvriers qualifiés",
+        "supervisors": "Chefs de chantier",
+        "drivers": "Chauffeurs",
+        "logisticians": "Logisticiens"
+      }
+    }
+  },
+  "news": {
+    "eyebrow": "Actualités",
+    "title": "Ce qui se passe chez ATHL",
+    "subtitle": "Chantiers livrés, nouveaux partenariats, recrutements : les dernières nouvelles de nos équipes BTP, mobilité et import-logistique.",
+    "readMore": "Lire la suite",
+    "showMore": "Voir plus d'actualités",
+    "backToList": "Retour à toutes nos actualités",
+    "filters": {
+      "theme": "Filtrer par thème",
+      "all": "Toutes",
+      "selected": "sélectionnés",
+      "clear": "Effacer les filtres"
+    },
+    "cta": {
+      "title": "Une question sur une de nos actualités ?",
+      "text": "Contactez-nous ou rejoignez nos équipes."
     }
   },
   "services": {
@@ -313,7 +338,26 @@
     "addressLabel": "Adresse",
     "address": "Abidjan<br />Côte d'Ivoire",
     "addressNote": "Interventions sur Abidjan et l'ensemble du territoire ivoirien.",
-    "socialLabel": "Réseaux"
+    "socialLabel": "Réseaux",
+    "form": {
+      "eyebrow": "Écrivez-nous",
+      "heading": "Envoyez-nous un message",
+      "subject": "Sujet",
+      "subjectPlaceholder": "Ex. Devis chantier, partenariat…",
+      "message": "Message",
+      "messagePlaceholder": "Décrivez votre besoin en quelques lignes…",
+      "consent": "J'autorise ATHL à me recontacter au sujet de ce message.",
+      "send": "Envoyer le message",
+      "reset": "Réinitialiser"
+    },
+    "info": {
+      "eyebrow": "Besoin d'aide ?",
+      "heading": "Entrer en contact avec nous",
+      "phoneTitle": "Une question ?",
+      "emailTitle": "Écrivez-nous",
+      "addressTitle": "Nous rendre visite"
+    },
+    "mapTitle": "Nous trouver"
   },
   "search": {
     "eyebrow": "Recherche",

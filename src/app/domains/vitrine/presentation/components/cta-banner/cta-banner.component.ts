@@ -33,6 +33,6 @@ export class CtaBannerComponent {
   @Input() text = '';
   @Input() showPhones = false;
   @Input() showActions = true;
-  @Input() mediaImage = 'images/team-group.png';
+  @Input() mediaImage = 'images/proj-4.png';
   @Input() mediaAlt = 'Réalisation ATHL';
 }

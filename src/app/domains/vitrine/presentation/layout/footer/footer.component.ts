@@ -108,27 +108,31 @@ import { ThemeService } from '../../../../../core/services/theme.service';
 
       <div class="footer__bottom">
         <div class="footer__copy">{{ 'common.footer.copyright' | transloco: { year } }}</div>
-        <div class="socials">
-          @if (contact().facebookUrl) {
-            <a [href]="contact().facebookUrl!" target="_blank" rel="noopener" aria-label="Facebook">f</a>
-          } @else {
-            <a routerLink="/contact" aria-label="Facebook">f</a>
-          }
-          @if (contact().youtubeUrl) {
-            <a [href]="contact().youtubeUrl!" target="_blank" rel="noopener" aria-label="YouTube">&#9658;</a>
-          } @else {
-            <a routerLink="/contact" aria-label="YouTube">&#9658;</a>
-          }
-          @if (contact().instagramUrl) {
-            <a [href]="contact().instagramUrl!" target="_blank" rel="noopener" aria-label="Instagram">&#9906;</a>
-          } @else {
-            <a routerLink="/contact" aria-label="Instagram">&#9906;</a>
-          }
-          @if (contact().linkedinUrl) {
-            <a [href]="contact().linkedinUrl!" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
-          } @else {
-            <a routerLink="/contact" aria-label="LinkedIn">in</a>
-          }
+        <div class="socials-group">
+          <span class="socials__label">{{ 'common.footer.followUs' | transloco }}</span>
+          <div class="socials">
+            @if (contact().facebookUrl) {
+              <a [href]="contact().facebookUrl!" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+            } @else {
+              <a routerLink="/contact" aria-label="Facebook">f</a>
+            }
+            @if (contact().youtubeUrl) {
+              <a [href]="contact().youtubeUrl!" target="_blank" rel="noopener" aria-label="YouTube">&#9658;</a>
+            } @else {
+              <a routerLink="/contact" aria-label="YouTube">&#9658;</a>
+            }
+            @if (contact().instagramUrl) {
+              <a [href]="contact().instagramUrl!" target="_blank" rel="noopener" aria-label="Instagram">&#9906;</a>
+            } @else {
+              <a routerLink="/contact" aria-label="Instagram">&#9906;</a>
+            }
+            @if (contact().linkedinUrl) {
+              <a [href]="contact().linkedinUrl!" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+            } @else {
+              <a routerLink="/contact" aria-label="LinkedIn">in</a>
+            }
+            <a href="https://www.tiktok.com/@africatalentconsulting" target="_blank" rel="noopener" aria-label="TikTok">&#9835;</a>
+          </div>
         </div>
       </div>
     </footer>

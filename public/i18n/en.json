@@ -26,11 +26,12 @@
         "2": "Morocco",
         "3": "Europe"
       },
-      "copyright": "© {{year}} ATHL — All rights reserved"
+      "copyright": "© {{year}} ATHL — All rights reserved",
+      "followUs": "Follow us"
     },
     "nav": {
       "home": "Home",
-      "team": "Our teams",
+      "news": "News",
       "projects": "Projects",
       "services": "Services",
       "careers": "Careers",
@@ -201,7 +202,31 @@
     "next": "Next member",
     "groundTeams": {
       "title": "Our field teams",
-      "lead": "Skilled workers, site managers, drivers and logistics staff: every trade is supervised, trained and monitored. This organisation is what lets us meet deadlines without compromising on safety."
+      "lead": "Skilled workers, site managers, drivers and logistics staff: every trade is supervised, trained and monitored. This organisation is what lets us meet deadlines without compromising on safety.",
+      "roles": {
+        "workers": "Skilled workers",
+        "supervisors": "Site managers",
+        "drivers": "Drivers",
+        "logisticians": "Logistics staff"
+      }
+    }
+  },
+  "news": {
+    "eyebrow": "News",
+    "title": "What's happening at ATHL",
+    "subtitle": "Completed sites, new partnerships, hiring campaigns: the latest updates from our construction, mobility and import-logistics teams.",
+    "readMore": "Read more",
+    "showMore": "Show more news",
+    "backToList": "Back to all news",
+    "filters": {
+      "theme": "Filter by theme",
+      "all": "All",
+      "selected": "selected",
+      "clear": "Clear filters"
+    },
+    "cta": {
+      "title": "A question about one of our news items?",
+      "text": "Contact us or join our teams."
     }
   },
   "services": {
@@ -313,7 +338,26 @@
     "addressLabel": "Address",
     "address": "Abidjan<br />Côte d'Ivoire",
     "addressNote": "Operating in Abidjan and across Côte d'Ivoire.",
-    "socialLabel": "Social"
+    "socialLabel": "Social",
+    "form": {
+      "eyebrow": "Write to us",
+      "heading": "Send us a message",
+      "subject": "Subject",
+      "subjectPlaceholder": "E.g. Site quote, partnership…",
+      "message": "Message",
+      "messagePlaceholder": "Describe what you need in a few lines…",
+      "consent": "I allow ATHL to contact me back about this message.",
+      "send": "Send message",
+      "reset": "Reset"
+    },
+    "info": {
+      "eyebrow": "Need any help?",
+      "heading": "Get in touch with us",
+      "phoneTitle": "Have any question?",
+      "emailTitle": "Write us an email",
+      "addressTitle": "Visit anytime"
+    },
+    "mapTitle": "Find us"
   },
   "search": {
     "eyebrow": "Search",
