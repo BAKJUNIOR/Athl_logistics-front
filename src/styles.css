@@ -209,22 +209,26 @@ app-header .header { padding: 14px 0; }
 /* ---------- Hero plein cadre (photo de fond + texte superposé) ---------- */
 .hero--cover {
   position: relative; width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
-  min-height: 700px; display: flex; align-items: center; padding: 64px 0 200px; text-align: left; overflow: hidden;
+  min-height: 780px; display: flex; align-items: center; padding: 64px 0 60px; text-align: left; overflow: hidden;
 }
 .hero__media {
   position: absolute; inset: 0;
   background-size: cover; background-position: center 30%; background-repeat: no-repeat; background-attachment: fixed;
 }
-.hero__media--a { animation: hero-fade-a 16s ease-in-out infinite; }
-.hero__media--b { animation: hero-fade-b 16s ease-in-out infinite; }
-@keyframes hero-fade-a {
-  0%, 42% { opacity: 1; }
-  50%, 92% { opacity: 0; }
-  100% { opacity: 1; }
+/* Défilement du hero : 5 photos, une seule visible à la fois, fondu enchaîné en boucle continue. */
+.hero__media--1, .hero__media--2, .hero__media--3, .hero__media--4, .hero__media--5 {
+  opacity: 0; animation: hero-fade-multi 30s ease-in-out infinite;
 }
-@keyframes hero-fade-b {
-  0%, 42% { opacity: 0; }
-  50%, 92% { opacity: 1; }
+.hero__media--1 { animation-delay: 0s; }
+.hero__media--2 { animation-delay: -6s; }
+.hero__media--3 { animation-delay: -12s; }
+.hero__media--4 { animation-delay: -18s; }
+.hero__media--5 { animation-delay: -24s; }
+@keyframes hero-fade-multi {
+  0% { opacity: 0; }
+  3.6% { opacity: 1; }
+  16.4% { opacity: 1; }
+  20% { opacity: 0; }
   100% { opacity: 0; }
 }
 .hero__scrim {
@@ -232,16 +236,17 @@ app-header .header { padding: 14px 0; }
   background: linear-gradient(100deg, rgba(8,9,11,.93) 0%, rgba(8,9,11,.78) 38%, rgba(8,9,11,.4) 68%, rgba(8,9,11,.12) 100%);
 }
 .hero__inner { position: relative; z-index: 1; width: 100%; }
-.hero__content { max-width: 860px; }
-.hero--cover h1 { margin: 0; max-width: none; color: #fff; font-size: clamp(38px, 4.8vw, 64px); }
-.hero--cover p { margin: 24px 0 0; max-width: 480px; color: rgba(245,246,247,.82); }
+.hero__content { max-width: 900px; margin-top: -36px; }
+.hero--cover h1 { margin: 0; max-width: none; color: #fff; font-size: clamp(42px, 5.4vw, 72px); }
+.hero--cover p { margin: 24px 0 0; max-width: 520px; font-size: 16px; color: rgba(245,246,247,.82); }
+.hero--cover .btn--lg { padding: 20px 42px; font-size: 16px; }
 
 /* ---------- Cartes métiers chevauchant le bas du hero ---------- */
-.hero-cards { position: relative; z-index: 3; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); align-items: start; gap: 24px; margin-top: -170px; padding-bottom: 60px; }
+.hero-cards { position: relative; z-index: 3; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); align-items: start; gap: 24px; margin-top: -60px; padding-bottom: 60px; }
 .hero-cards::before {
   content: ""; position: absolute; z-index: -1;
-  top: 60px; bottom: 0; left: calc(50% - 50vw); right: calc(50% - 50vw);
-  background-image: linear-gradient(180deg, rgba(0,0,0,0) 0%, var(--bg) 78%), url('/images/pattern-1.png');
+  top: 0; bottom: 0; left: calc(50% - 50vw); right: calc(50% - 50vw);
+  background-image: linear-gradient(180deg, rgba(0,0,0,0) 0%, var(--bg) 55%), url('/images/pattern-1.png');
   background-repeat: no-repeat, no-repeat; background-size: 100% 100%, 100% 100%;
 }
 .hero-card:nth-child(2) { margin-top: 90px; }
