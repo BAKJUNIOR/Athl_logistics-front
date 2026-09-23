@@ -1,76 +1,57 @@
-<section class="hero" id="hero">
-  <h1 appReveal [innerHTML]="'home.hero.title' | transloco"></h1>
-  <p [appReveal]="110">{{ 'home.hero.subtitle' | transloco }}</p>
-  <div class="hero-actions" [appReveal]="220">
-    <a class="btn btn--light" routerLink="/a-propos">{{ 'home.hero.aboutUs' | transloco }}</a>
-    <a class="btn btn--ghost" routerLink="/projets">{{ 'home.hero.seeWork' | transloco }}</a>
-  </div>
-
-  <div class="rail-wrap" [appReveal]="300">
-    <div class="rail">
-      <div class="tile"><img src="images/hero-1.png" [attr.alt]="'home.hero.alt.worker' | transloco" /></div>
-      <div class="tile"><img src="images/hero-2.png" [attr.alt]="'home.hero.alt.siteDetail' | transloco" /></div>
-      <div class="tile tile--framed"><img src="images/hero-3.png" [attr.alt]="'home.hero.alt.siteManager' | transloco" /></div>
-      <div class="tile"><img src="images/proj-1.png" [attr.alt]="'home.hero.alt.twoWorkers' | transloco" /></div>
-      <div class="tile"><img src="images/proj-4.png" [attr.alt]="'home.hero.alt.engineer' | transloco" /></div>
-      <div class="tile"><img src="images/svc-3.png" [attr.alt]="'home.hero.alt.delivery' | transloco" /></div>
-      <div class="tile"><img src="images/svc-4.png" [attr.alt]="'home.hero.alt.materials' | transloco" /></div>
-      <div class="tile"><img src="images/svc-2.png" [attr.alt]="'home.hero.alt.renovationSite' | transloco" /></div>
-    </div>
-  </div>
-</section>
-
-<section class="split" id="workforce">
-  <div class="frame" appReveal>
-    <img src="images/team-lead.png" [attr.alt]="'home.workforce.imageAlt' | transloco" />
-  </div>
-
-  <div class="split__col" [appReveal]="140">
-    <div>
-      <h2>{{ 'home.workforce.title' | transloco }}</h2>
-      <p class="lead">{{ 'home.workforce.lead' | transloco }}</p>
-      <a class="btn btn--light btn--block" routerLink="/a-propos">{{ 'common.learnMore' | transloco }}</a>
-    </div>
-
-    <div class="stats">
-      <div class="stat">
-        <div class="stat__num"><app-stat-counter [to]="sitesDelivered().value" [decimals]="sitesDelivered().decimals" [suffix]="sitesDelivered().suffix" /></div>
-        <div class="stat__label">{{ 'common.stats.sitesDelivered' | transloco }}</div>
-      </div>
-      <div class="stat">
-        <div class="stat__num"><app-stat-counter [to]="projectValue().value" [decimals]="projectValue().decimals" [suffix]="projectValue().suffix" /></div>
-        <div class="stat__label">{{ 'common.stats.projectValue' | transloco }}</div>
-      </div>
-      <div class="stat">
-        <div class="stat__num"><app-stat-counter [to]="assetValue().value" [decimals]="assetValue().decimals" [suffix]="assetValue().suffix" /></div>
-        <div class="stat__label">{{ 'common.stats.assetValue' | transloco }}</div>
+<section class="hero hero--cover" id="hero">
+  <div class="hero__media hero__media--a" role="img" [attr.aria-label]="'home.hero.imageAlt' | transloco" style="background-image: url('images/hero-cover.jpg')"></div>
+  <div class="hero__media hero__media--b" aria-hidden="true" style="background-image: url('images/bg-1.jpg')"></div>
+  <div class="hero__scrim"></div>
+  <div class="hero__inner wrap">
+    <div class="hero__content">
+      <h1 appReveal class="reveal--top" [innerHTML]="'home.hero.title' | transloco"></h1>
+      <p class="reveal--top" [appReveal]="110">{{ 'home.hero.subtitle' | transloco }}</p>
+      <div class="hero-actions hero-actions--left reveal--top" [appReveal]="220">
+        <a class="btn btn--light btn--lg" routerLink="/projets">{{ 'home.hero.seeWork' | transloco }}</a>
       </div>
     </div>
   </div>
 </section>
 
-<section class="projects" id="projects">
-  <div class="projects__intro" appReveal>
-    <h2>{{ 'home.projects.title' | transloco }}</h2>
-    <p>{{ 'home.projects.subtitle' | transloco }}</p>
-    <div class="locate">
-      <div class="locate__field">{{ 'common.location' | transloco }}</div>
-      <a class="btn btn--light" routerLink="/projets">{{ 'home.projects.liveSite' | transloco }}</a>
-    </div>
-  </div>
+<div class="hero-cards wrap">
+    <article class="hero-card" [appReveal]="60">
+      <span class="hero-card__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 21V9l8-5 8 5v12M9 21v-6h6v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <h3>{{ 'home.pillars.btp.title' | transloco }}</h3>
+      <p>{{ 'home.pillars.btp.lead' | transloco }}</p>
+      <div class="hero-card__media"><img src="images/card-construction.jpg" [attr.alt]="'home.pillars.btp.imageAlt' | transloco" /></div>
+    </article>
 
-  <div class="mosaic">
-    <div class="m1" [appReveal]="80"><img src="images/proj-1.png" [attr.alt]="'home.projects.alt.steelStructure' | transloco" /></div>
-    <div class="m2" [appReveal]="180"><img src="images/proj-2.png" [attr.alt]="'home.projects.alt.teamAndCrane' | transloco" /></div>
-    <div class="m3" [appReveal]="280"><img src="images/proj-3.png" [attr.alt]="'home.projects.alt.teamReviewingPlans' | transloco" /></div>
-    <div class="m4" [appReveal]="360"><img src="images/proj-4.png" [attr.alt]="'home.projects.alt.highRiseSite' | transloco" /></div>
-    <div class="m5" [appReveal]="440"><img src="images/proj-5.png" [attr.alt]="'home.projects.alt.teamBriefing' | transloco" /></div>
-  </div>
-</section>
+    <article class="hero-card" [appReveal]="140">
+      <span class="hero-card__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M6 28l3.2-10.4A4 4 0 0 1 13 15h22a4 4 0 0 1 3.8 2.6L42 28" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" transform="translate(-4 -8) scale(0.55)"/><rect x="4" y="28" width="40" height="10" rx="3" stroke="currentColor" stroke-width="1.8" transform="translate(-4 -8) scale(0.55)"/><circle cx="13" cy="38" r="3.5" stroke="currentColor" stroke-width="1.8" transform="translate(-4 -8) scale(0.55)"/><circle cx="35" cy="38" r="3.5" stroke="currentColor" stroke-width="1.8" transform="translate(-4 -8) scale(0.55)"/></svg>
+      </span>
+      <h3>{{ 'home.pillars.mobility.title' | transloco }}</h3>
+      <p>{{ 'home.pillars.mobility.lead' | transloco }}</p>
+      <div class="hero-card__media"><img src="images/pillar-mobility.jpg" [attr.alt]="'home.pillars.mobility.imageAlt' | transloco" /></div>
+    </article>
+
+    <article class="hero-card" [appReveal]="220">
+      <span class="hero-card__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M3 10l9-5 9 5-9 5-9-5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M3 10v7l9 5 9-5v-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 15v7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </span>
+      <h3>{{ 'home.pillars.import.title' | transloco }}</h3>
+      <p>{{ 'home.pillars.import.lead' | transloco }}</p>
+      <div class="hero-card__media"><img src="images/svc-4.png" [attr.alt]="'home.pillars.import.imageAlt' | transloco" /></div>
+    </article>
+</div>
+
+<app-workforce-tabs />
 
 <section class="services" id="safety">
-  <h2 appReveal>{{ 'home.services.title' | transloco }}</h2>
-  <p [appReveal]="100">{{ 'home.services.subtitle' | transloco }}</p>
+  <div class="sites__head" appReveal>
+    <div>
+      <div class="about-block__eyebrow"><span></span>{{ 'home.services.eyebrow' | transloco }}</div>
+      <h2>{{ 'home.services.title' | transloco }}</h2>
+      <p class="lead">{{ 'home.services.subtitle' | transloco }}</p>
+    </div>
+  </div>
 
   <div class="cards">
     @for (service of services(); track service.slug; let i = $index) {
@@ -80,6 +61,43 @@
         <div class="card__foot">
           <div class="card__title">{{ service.title }}</div>
           <a class="card__cta" [routerLink]="['/services', service.slug]">{{ 'common.learnMore' | transloco }} <span>&rarr;</span></a>
+        </div>
+      </article>
+    }
+  </div>
+</section>
+
+<section class="sites" id="projects">
+  <div class="sites__head" appReveal>
+    <div>
+      <div class="about-block__eyebrow"><span></span>{{ 'home.projects.eyebrow' | transloco }}</div>
+      <h2>{{ 'home.projects.title' | transloco }}</h2>
+      <p class="lead">{{ 'home.projects.subtitle' | transloco }}</p>
+    </div>
+    <div class="sites__side">
+      <span class="live"><i></i>{{ 'home.projects.live' | transloco }}</span>
+    </div>
+  </div>
+
+  <div class="sites__panels" [appReveal]="120">
+    @for (s of sites(); track s.image; let i = $index) {
+      <article
+        class="site"
+        [class.is-active]="activeSite() === i"
+        tabindex="0"
+        (mouseenter)="activeSite.set(i)"
+        (focus)="activeSite.set(i)"
+        (click)="activeSite.set(i)"
+      >
+        <img [src]="s.image" [alt]="s.titleKey ? (s.titleKey | transloco) : s.title" loading="lazy" />
+        <div class="site__scrim"></div>
+        <div class="site__num">0{{ i + 1 }}</div>
+        <div class="site__vt" aria-hidden="true">{{ s.titleKey ? (s.titleKey | transloco) : s.title }}</div>
+        <div class="site__body">
+          <span class="site__tag"><i></i>{{ 'home.projects.live' | transloco }}</span>
+          <h3>{{ s.titleKey ? (s.titleKey | transloco) : s.title }}</h3>
+          @if (s.caption) { <p>{{ s.caption }}</p> }
+          <a class="site__cta" routerLink="/projets">{{ 'home.projects.viewAll' | transloco }} <span>&rarr;</span></a>
         </div>
       </article>
     }

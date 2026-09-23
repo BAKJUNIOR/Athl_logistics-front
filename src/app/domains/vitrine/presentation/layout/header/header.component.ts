@@ -1,5 +1,5 @@
 // En-tête du site vitrine : logo, navigation, recherche, langue, thème, bouton devis et menu mobile.
-import { Component, inject, signal } from '@angular/core';
+import { Component, HostListener, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { QuoteModalService } from '../../services/quote-modal.service';
@@ -8,6 +8,7 @@ import { LanguageService } from '../../../../../core/services/language.service';
 
 @Component({
   selector: 'app-header',
+  host: { '[class.is-scrolled]': 'scrolled()' },
   imports: [RouterLink, RouterLinkActive, TranslocoPipe],
   template: `
     <header class="header">
@@ -119,6 +120,12 @@ export class HeaderComponent {
   protected readonly languageService = inject(LanguageService);
 
   readonly menuOpen = signal(false);
+  readonly scrolled = signal(typeof window !== 'undefined' && window.scrollY > 24);
+
+  @HostListener('window:scroll')
+  onScroll(): void {
+    this.scrolled.set(window.scrollY > 24);
+  }
 
   openQuote(event: Event): void {
     event.preventDefault();

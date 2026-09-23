@@ -1,35 +1,21 @@
 <section class="phero">
-  <div class="phero__eyebrow" appReveal>{{ 'about.eyebrow' | transloco }}</div>
+  <div class="about-block__eyebrow" appReveal><span></span>{{ 'about.eyebrow' | transloco }}</div>
   <h1 [appReveal]="80">{{ 'about.title' | transloco }}</h1>
   <p [appReveal]="160">{{ 'about.subtitle' | transloco }}</p>
 </section>
 
-<section class="split">
-  <div class="frame" appReveal>
-    <img src="images/team-lead.png" [attr.alt]="'about.imageAlt' | transloco" loading="lazy" />
-  </div>
-  <div class="split__col" [appReveal]="140">
+<app-workforce-tabs />
+
+<section class="team-intro">
+  <div class="sites__head" appReveal>
     <div>
-      <h2>{{ 'home.workforce.title' | transloco }}</h2>
-      <p class="lead">{{ 'about.lead' | transloco }}</p>
-      <a class="btn btn--light btn--block" routerLink="/equipe">{{ 'about.meetTeam' | transloco }}</a>
-    </div>
-    <div class="stats">
-      <div class="stat">
-        <div class="stat__num"><app-stat-counter [to]="sitesDelivered().value" [decimals]="sitesDelivered().decimals" [suffix]="sitesDelivered().suffix" /></div>
-        <div class="stat__label">{{ 'common.stats.sitesDelivered' | transloco }}</div>
-      </div>
-      <div class="stat">
-        <div class="stat__num"><app-stat-counter [to]="projectValue().value" [decimals]="projectValue().decimals" [suffix]="projectValue().suffix" /></div>
-        <div class="stat__label">{{ 'common.stats.projectValue' | transloco }}</div>
-      </div>
-      <div class="stat">
-        <div class="stat__num"><app-stat-counter [to]="assetValue().value" [decimals]="assetValue().decimals" [suffix]="assetValue().suffix" /></div>
-        <div class="stat__label">{{ 'common.stats.assetValue' | transloco }}</div>
-      </div>
+      <div class="about-block__eyebrow"><span></span>{{ 'team.eyebrow' | transloco }}</div>
+      <h2>{{ 'team.title' | transloco }}</h2>
+      <p class="lead">{{ 'team.subtitle' | transloco }}</p>
     </div>
   </div>
 </section>
+<app-team-members />
 
 <section class="values">
   <h2 appReveal>{{ 'about.values.title' | transloco }}</h2>

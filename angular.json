@@ -7,7 +7,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "athl_logistics-front": {
+    "athl_front": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -63,10 +63,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "athl_logistics-front:build:production"
+              "buildTarget": "athl_front:build:production"
             },
             "development": {
-              "buildTarget": "athl_logistics-front:build:development"
+              "buildTarget": "athl_front:build:development"
             }
           },
           "defaultConfiguration": "development"

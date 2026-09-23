@@ -13,6 +13,21 @@
     "language": "Language",
     "footerAbout": "Africa Talent Habitat & Logistics — construction, renovation, mobility and import of materials, delivered by skilled teams.",
     "athlWorkAlt": "ATHL project",
+    "footer": {
+      "aboutTitle": "About ATHL",
+      "companyTitle": "Our company",
+      "officeTitle": "Our office",
+      "sourcingTitle": "Our sourcing regions",
+      "email": "Contact@athl.com",
+      "hub": "Abidjan",
+      "sourcing": {
+        "0": "China",
+        "1": "Turkey",
+        "2": "Morocco",
+        "3": "Europe"
+      },
+      "copyright": "© {{year}} ATHL — All rights reserved"
+    },
     "nav": {
       "home": "Home",
       "team": "Our teams",
@@ -60,27 +75,38 @@
   },
   "home": {
     "hero": {
-      "title": "The expertise that builds. <em>The logistics that accelerate.</em>",
+      "title": "The expertise that builds.<br><em>The logistics that accelerate.</em>",
       "subtitle": "Africa Talent Habitat & Logistics: skilled teams, proven methods and a tightly managed supply chain, from the first drawing to delivery.",
       "aboutUs": "Who we are",
       "seeWork": "See our work",
-      "alt": {
-        "worker": "Portrait of a worker",
-        "siteDetail": "Site detail",
-        "siteManager": "Site manager",
-        "twoWorkers": "Two workers on site",
-        "engineer": "Engineer with drawings",
-        "delivery": "Delivery",
-        "materials": "Imported materials",
-        "renovationSite": "Renovation site"
-      }
+      "imageAlt": "ATHL construction site lifting a structure"
     },
     "workforce": {
+      "eyebrow": "Welcome to ATHL",
       "imageAlt": "Two managers on the construction site",
-      "title": "We own the site. We deliver sturdier results",
-      "lead": "Africa Talent Habitat & Logistics brings together experienced professionals, proven methods and a culture of accountability to deliver projects built to last. From construction and renovation to mobility and the import of materials, our teams work with clarity, rigour and know-how."
+      "reviewAlt": "ATHL team reviewing progress on site",
+      "title": "We own every project. We deliver sturdier results",
+      "lead": "Africa Talent Habitat & Logistics brings together experienced professionals, proven methods and a culture of accountability to deliver projects built to last. From construction and renovation to mobility and the import of materials, our teams work with clarity, rigour and know-how.",
+      "quote": "Simplify your construction and logistics projects with a personal approach, from the first drawing to delivery.",
+      "badgeLabel": "Sites delivered",
+      "features": {
+        "projectValue": "Project value",
+        "assetValue": "Asset value"
+      },
+      "videoAlt": "Our teams at work on site",
+      "playCta": "See our work"
     },
     "projects": {
+      "eyebrow": "Our sites",
+      "live": "Live now",
+      "sites": {
+        "steel": "Structure and formwork",
+        "lifting": "Lifting and cranage",
+        "interior": "Interior renovation",
+        "port": "Port terminal and import",
+        "building": "Building under construction"
+      },
+      "viewAll": "See all our work",
       "title": "Sites under way across the country",
       "subtitle": "See what our teams are building right now",
       "liveSite": "Live site",
@@ -93,14 +119,58 @@
       }
     },
     "services": {
+      "eyebrow": "What we do",
       "title": "Our services",
       "subtitle": "From the construction site to logistics: four trades to run your projects end to end."
+    },
+    "pillars": {
+      "title": "Our 3 core businesses",
+      "subtitle": "One partner to build, supply and move forward.",
+      "btp": {
+        "title": "Construction & renovation",
+        "lead": "The expertise that builds, the logistics that accelerates. ATHL supports you from construction to delivering your materials and transport solutions.",
+        "imageAlt": "ATHL construction site",
+        "items": {
+          "0": "Construction",
+          "1": "Renovation & rehabilitation",
+          "2": "Material supply",
+          "3": "Property management"
+        }
+      },
+      "mobility": {
+        "title": "Mobility & ride-hailing",
+        "lead": "Building the future, supporting the movement. Vehicle rental and mobility solutions for individuals and businesses.",
+        "imageAlt": "ATHL driver behind the wheel, GPS mounted",
+        "items": {
+          "0": "Short and long-term rental",
+          "1": "Professional transport",
+          "2": "Premium ride-hailing service",
+          "3": "Fleet management for businesses"
+        }
+      },
+      "import": {
+        "title": "Import & logistics",
+        "lead": "Your partner to build, supply and move forward. Direct import and distribution of materials from China, Turkey, Morocco and Europe.",
+        "imageAlt": "ATHL import and logistics port",
+        "items": {
+          "0": "Direct import",
+          "1": "Sales & distribution",
+          "2": "Delivery to site",
+          "3": "Special order handling"
+        }
+      }
     },
     "testimonials": {
       "title": "Trusted by project directors",
       "previous": "Previous testimonial",
       "next": "Next testimonial"
     }
+  },
+  "partners": {
+    "eyebrow": "They trust us",
+    "title": "Our partners",
+    "subtitle": "Suppliers, carriers and trusted partners supporting us on every site and every delivery.",
+    "cta": "Become a partner"
   },
   "about": {
     "eyebrow": "About",
